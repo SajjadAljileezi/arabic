@@ -1,2 +1,2 @@
 <center><h1>Resources </h1></center>
-https://coolors.co/palettes/trending
+1. UI THeme https://coolors.co/palettes/trending
