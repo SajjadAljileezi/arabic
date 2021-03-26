@@ -1,0 +1,48 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+h5.title1{
+    background: rgb(91, 86, 19,0.7);
+        padding: 20px;
+    font-size: 5rem;
+
+}
+#carouselExampleCaptions > div > div:nth-child(1) > div > p.subtitile1{
+    font-size: 3rem;
+    background: rgb(91, 86, 19,0.7);
+    padding: 20px;
+}
+h5.title2{
+    background: rgb(91, 86, 19,0.7);
+    padding: 20px;
+    font-size: 5rem;
+
+}
+h5.title3{
+    background: rgb(91, 86, 19,0.7);
+    padding: 20px;
+    font-size: 5rem;
+
+}
+.bg-red{
+    background-color: #c00 ;
+
+}
+.whyus{
+    background-color: rgb(142, 202, 230);
+
+
+}
+.fas{
+   color: #023047;
+}
+.fas:hover{
+    transition: color 0.3s ease-in-out;
+   color: white;
+}
