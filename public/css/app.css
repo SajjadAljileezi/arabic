@@ -10027,7 +10027,7 @@ h5.title3 {
 }
 
 .bg-red {
-  background-color: #c00;
+  background-color: #003049;
 }
 
 .whyus {
@@ -10040,5 +10040,19 @@ h5.title3 {
 
 .fas:hover {
   transition: color 0.3s ease-in-out;
+  color: white;
+}
+
+.partners {
+  background-color: #eae2b7;
+}
+
+.delivery {
+  background-color: #219ebc;
+  color: white;
+}
+
+.contact {
+  background-color: #fb8500;
   color: white;
 }

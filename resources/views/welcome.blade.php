@@ -84,24 +84,103 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-    <div class="whyus">
+{{--Why Us --}}
+    <div class="whyus pb-5">
         <div class="container">
             <h1 class="text-center p-5 "> لماذا تتسوق و تشحن معنا؟ </h1>
             <div class="row">
                 <div class="col-lg-3 fas">  <h2 class="  mb-4"> شحن جوي سريع  </h2>
-                    <i class="fas fa-shipping-fast fa-10x"></i>
+                    <i class="fas fa-shipping-fast fa-8x"></i>
                  </div>
                 <div class="col-lg-3 fas">
                     <h2 class=" mb-4">طرق دفع متعددة </h2>
-                    <i class="fas fa-money-bill-wave-alt fa-10x"></i></div>
+                    <i class="fas fa-money-bill-wave-alt fa-8x"></i></div>
                 <div class="col-lg-3 fas">
                     <h2 class=" mb-4">خدمة دعم ٢٤ ساعة</h2>
-                    <i class="fas fa-users-cog fa-10x"></i></div>
+                    <i class="fas fa-users-cog fa-8x"></i></div>
                 <div class="col-lg-3 fas">
                     <h2 class=" mb-4">خدمة خزن ٤٥ يوم</h2>
-                    <i class="fas fa-store-alt fa-10x"></i></div>
+                    <i class="fas fa-store-alt fa-8x"></i></div>
+
+                <div class="col-lg-3 mt-5 fas">
+                    <h2 class=" mb-4">لايوجد ضريبة شراء</h2>
+                    <i class="fas fa-file-invoice-dollar fa-8x"></i></div>
+                <div class="col-lg-3 mt-5 fas">
+                    <h2 class=" mb-4">تسوق بدون اشتراك</h2>
+                    <i class="fas fa-comment-slash fa-8x"></i></div>
+                <div class="col-lg-3 mt-5 fas">
+                    <h2 class=" mb-4">خدمة ارجاع البضائع</h2>
+                    <i class="fas fa-undo-alt fa-8x"></i></div>
+                <div class="col-lg-3 mt-5 fas">
+                    <h2 class=" mb-4">خدمة فحص البضائع</h2>
+                    <i class="fas fa-calendar-check fa-8x"></i></div>
             </div>
         </div>
     </div>
+{{--Our Partners --}}
+<div class="partners pb-5">
+    <div class="container">
+        <h1 class="text-center p-5 ">شركائنا </h1>
+        <div class="row">
+            <div class="col-lg-2  "> <a href="https://www.amazon.com" target="_blank"> <img src="{{ asset('img/logos/amazon.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.ebay.com" target="_blank"> <img src="{{ asset('img/logos/ebay.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.macy.com" target="_blank"> <img src="{{ asset('img/logos/macy.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.nordstrom.com" target="_blank"> <img src="{{ asset('img/logos/nordstrom.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.maccosmetics.com" target="_blank"> <img src="{{ asset('img/logos/mac.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.maccosmetics.com" target="_blank"> <img src="{{ asset('img/logos/sephora.png') }}" class="w-100"> </a> </div>
+
+
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-2  "> <a href="https://www.merrell.com" target="_blank"> <img src="{{ asset('img/logos/merrell.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.oakley.com" target="_blank"> <img src="{{ asset('img/logos/oakley.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.511tactical.com/" target="_blank"> <img src="{{ asset('img/logos/5.11.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.thenorthface.com/" target="_blank"> <img src="{{ asset('img/logos/north.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.underarmour.com/" target="_blank"> <img src="{{ asset('img/logos/under.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.nike.com/" target="_blank"> <img src="{{ asset('img/logos/nike.png') }}" class="w-100"> </a> </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-lg-2  "> <a href="https://www.oreillyauto.com" target="_blank"> <img src="{{ asset('img/logos/railey.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.autozone.com" target="_blank"> <img src="{{ asset('img/logos/zone.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.car-part.com" target="_blank"> <img src="{{ asset('img/logos/logocar.jpeg') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.ngksparkplugs.com" target="_blank"> <img src="{{ asset('img/logos/ngk.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.bosch.com" target="_blank"> <img src="{{ asset('img/logos/bosch.png') }}" class="w-100"> </a> </div>
+            <div class="col-lg-2  "> <a href="https://www.milwaukeetool.com" target="_blank"> <img src="{{ asset('img/logos/miluakee.png') }}" class="w-100"> </a> </div>
+
+        </div>
+    </div>
+</div>
+{{--Delivery companies--}}
+<div class="delivery pb-5">
+    <div class="container">
+        <h1 class="text-center p-5 "> شركات الشحن </h1>
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/dhl.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/fedex.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/usps.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/ups.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/aramex.png') }}" class="w-100">  </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{{--Contact US--}}
+<div class="contact pb-5">
+    <div class="container">
+        <h1 class="text-center p-5 "> اتصل بنا  </h1>
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/dhl.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/fedex.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/usps.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/ups.png') }}" class="w-100">  </div>
+                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/aramex.png') }}" class="w-100">  </div>
+            </div>
+
+        </div>
+    </div>
+</div>
     </body>
 </html>
