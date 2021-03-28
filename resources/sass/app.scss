@@ -4,6 +4,9 @@
 // Variables
 @import 'variables';
 
+// Mobile
+@import 'mobile';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
@@ -13,7 +16,7 @@ h5.title1{
     font-size: 5rem;
 
 }
-#carouselExampleCaptions > div > div:nth-child(1) > div > p.subtitile1{
+ p.subtitile1{
     font-size: 3rem;
     background: rgb(91, 86, 19,0.7);
     padding: 20px;
@@ -60,3 +63,5 @@ h5.title3{
     background-color: rgb(251, 133, 0);
     color: white;
 }
+//Mobile
+

@@ -13,7 +13,7 @@
     <body>
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-red">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top pt-3  bg-red">
         <a class="navbar-brand" href="#">سندباد</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">الاشتراكات <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">بيع مباشر <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">حاسبة الشحن</a>
@@ -56,20 +56,20 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="{{ asset('img/shopping1.jpg') }}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption  d-md-block">
                 <h5 class="title1">تسوق من اي موقع امريكي </h5>
-                <p class="subtitile1">شحن لجميع محافظات العراق </p>
+                <p class="subtitile1 d-none">شحن لجميع محافظات العراق </p>
             </div>
         </div>
         <div class="carousel-item">
             <img src="{{ asset('img/shopping2.jpg') }}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption  d-md-block">
                 <h5 class="title2">اشتري القطع الاصلية من المناشئ العالمية </h5>
             </div>
         </div>
         <div class="carousel-item">
             <img src="{{ asset('img/shopping3.jpg') }}" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-caption  d-md-block">
                 <h5 class="title3"> طرق دفع متعددة وبدون ضرائب مع ٤٥ يوم فترة تجميع الاغراض  </h5>
 
             </div>
@@ -107,7 +107,7 @@
                     <i class="fas fa-file-invoice-dollar fa-8x"></i></div>
                 <div class="col-lg-3 mt-5 fas">
                     <h2 class=" mb-4">تسوق بدون اشتراك</h2>
-                    <i class="fas fa-comment-slash fa-8x"></i></div>
+                    <i class="fab fa-slack-hash fa-8x"></i></div>
                 <div class="col-lg-3 mt-5 fas">
                     <h2 class=" mb-4">خدمة ارجاع البضائع</h2>
                     <i class="fas fa-undo-alt fa-8x"></i></div>
@@ -171,14 +171,34 @@
     <div class="container">
         <h1 class="text-center p-5 "> اتصل بنا  </h1>
         <div class="row">
-            <div class="row">
-                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/dhl.png') }}" class="w-100">  </div>
-                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/fedex.png') }}" class="w-100">  </div>
-                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/usps.png') }}" class="w-100">  </div>
-                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/ups.png') }}" class="w-100">  </div>
-                <div class="col-lg-2  ">  <img src="{{ asset('img/logos/aramex.png') }}" class="w-100">  </div>
-            </div>
+          <div class="col-lg-6">
+              <form>
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1">الاسم</label>
+                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="اسم">
+                  </div><div class="form-group">
+                      <label for="exampleFormControlInput1">الايميل</label>
+                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="الايميل">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleFormControlTextarea1">الرساله</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <div class="col-auto my-1">
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+              </form>
+          </div>
 
+            <div class="col-lg-6">
+                <h1 class="text-right"> موقع الشركة</h1>
+                <h3 class="text-right"> 1001 SW 5th Ave #1100</h3>
+                <h3 class="text-right"> Portland, OR 97204</h3>
+                <h1 class="text-right pt-3"> هاتف</h1>
+                <h3 class="text-right"> (503) 544-3120</h3>
+                <h1 class="text-right pt-3"> ايميل</h1>
+                <h3 class="text-right"> (503) 544-3120</h3>
+            </div>
         </div>
     </div>
 </div>
