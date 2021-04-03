@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">بيع مباشر <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">كيف نعمل  <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">حاسبة الشحن</a>
@@ -117,6 +117,71 @@
             </div>
         </div>
     </div>
+{{--How it works --}}
+<div class="shipway pb-5">
+
+        <h1 class="text-center p-5 ">كيف نعمل </h1>
+        <div class="row ">
+           <div class="container">
+                    <div style=" position: relative; ">
+                        <div class="d-flex lineParent">
+                            <div class="connecting-line"></div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="stepTab">
+                                <div class="square-tab">
+                                    <div>١</div>
+                                </div>
+                            </div>
+                            <div class="stepTab">
+                                <div class="square-tab">
+                                    <div>٢</div>
+                                </div>
+                            </div>
+                            <div class="stepTab">
+                                <div class="square-tab">
+                                    <div>٣</div>
+                                </div>
+                            </div>
+                            <div class="stepTab">
+                                <div class="square-tab">
+                                    <div>٤</div>
+                                </div>
+                            </div>
+                            <div class="stepTab">
+                                <div class="square-tab">
+                                    <div>٥</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="stepTab text-break">
+                           تسوق من اي موقع امريكي او عالمي
+                            <img src="{{ asset('img/step1.svg') }}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="stepTab text-break">
+                             اشحن الى مخازننا في امريكا
+                            <img src="{{ asset('img/step2.svg') }}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="stepTab text-break">
+                            جمع مشترياتك في مخازننا
+                            <img src="{{ asset('img/step3.svg') }}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="stepTab text-break">
+                            اشحن الى العراق باسعار تنافسية
+                            <img src="{{ asset('img/step4.svg') }}" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="stepTab text-break">
+                            استلم بضاعتك من وكيل الشحن في محافظتك
+                            <img src="{{ asset('img/ship5.svg') }}" class="d-block w-100" alt="...">
+                        </div>
+                    </div>
+                </div>
+
+
+</div>
 {{--Our Partners --}}
 <div class="partners pb-5">
     <div class="container">
@@ -166,13 +231,48 @@
         </div>
     </div>
 </div>
+{{--    Calculator--}}
+    <div class="calculator pb-5">
+        <div class="container">
+            <h1 class="text-center p-5 ">حاسبة الشحن </h1>
+            <div class="row">
+                <div class="col-lg-6"></div>
+                <div class="col-lg-6">
+                    <form method="POST" action="{{url('calculateshippings')}}" accept-charset="UTF-8">
+                        @csrf
+                        <div class="col pt-3">
+                            <input type="text"name="country" class=" text-right form-control" placeholder="الدولة">
+                        </div>
+                        <div class="col pt-3">
+                            <input type="text" class=" text-right form-control" placeholder="المدينة">
+                        </div>
+                        <div class="col pt-3 ">
+                            <input type="text" class=" text-right form-control" placeholder="الطول">
+                        </div>
+                        <div class="col pt-3">
+                            <input type="text" class="text-right form-control" placeholder="العرض">
+                        </div><div class="col pt-3">
+                            <input type="text" class="text-right form-control" placeholder="الارتفاع">
+                        </div>
+
+                        <button type="submit" class="btn float-right btn-warning mt-4">احسب</button>
+                    </form>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
 {{--Contact US--}}
 <div class="contact pb-5">
     <div class="container">
         <h1 class="text-center p-5 "> اتصل بنا  </h1>
         <div class="row">
           <div class="col-lg-6">
-              <form>
+              <form  >
+
                   <div class="form-group">
                       <label for="exampleFormControlInput1">الاسم</label>
                       <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="اسم">

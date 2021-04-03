@@ -65,3 +65,43 @@ h5.title3{
 }
 //Mobile
 
+.lineParent{
+    height: 100%;
+    width:100%;
+    align-items: center;
+    position:absolute;
+}
+
+.connecting-line {
+    height: 2px;
+    background: #e0e0e0;
+    width: 80%;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.stepTab{
+    width: 20%;
+    text-align: center;
+    z-index: 2;
+
+}
+.square-tab {
+    width: 50px;
+    height: 50px;
+    /*line-height: 45px;*/
+    border-radius: 10px;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    font-size: 25px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.calculator{
+    background-color: rgb(2, 48, 71);
+    color: white;
+}

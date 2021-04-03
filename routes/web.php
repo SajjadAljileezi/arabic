@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/calculateshippings', [App\Http\Controllers\ShippingController::class, 'calculateShipping'])->name('calculateShipping');
+
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
