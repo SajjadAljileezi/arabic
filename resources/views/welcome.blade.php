@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -7,6 +8,7 @@
         <title> سندباد | تسوق من امريكا واشحن الى العراق </title>
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     </head>
@@ -238,24 +240,24 @@
             <div class="row">
                 <div class="col-lg-6"></div>
                 <div class="col-lg-6">
-                    <form method="POST" action="{{url('calculateshippings')}}" accept-charset="UTF-8">
-                        @csrf
+                    <form>
+
                         <div class="col pt-3">
-                            <input type="text"name="country" class=" text-right form-control" placeholder="الدولة">
+                            <input type="text" name="country" class=" text-right form-control" placeholder="الدولة">
                         </div>
                         <div class="col pt-3">
-                            <input type="text" class=" text-right form-control" placeholder="المدينة">
+                            <input type="text" name="city" class=" text-right form-control" placeholder="المدينة">
                         </div>
                         <div class="col pt-3 ">
-                            <input type="text" class=" text-right form-control" placeholder="الطول">
+                            <input type="text" name="length"  class=" text-right form-control" placeholder="الطول">
                         </div>
                         <div class="col pt-3">
-                            <input type="text" class="text-right form-control" placeholder="العرض">
+                            <input type="text" name="width" class="text-right form-control" placeholder="العرض">
                         </div><div class="col pt-3">
-                            <input type="text" class="text-right form-control" placeholder="الارتفاع">
+                            <input type="text" name="height" class="text-right form-control" placeholder="الارتفاع">
                         </div>
 
-                        <button type="submit" class="btn float-right btn-warning mt-4">احسب</button>
+                        <button   type="button" class="btn calculate save float-right btn-warning mt-4">احسب</button>
                     </form>
 
                 </div>
@@ -266,7 +268,7 @@
         </div>
     </div>
 {{--Contact US--}}
-<div class="contact pb-5">
+<div class="contact p-5">
     <div class="container">
         <h1 class="text-center p-5 "> اتصل بنا  </h1>
         <div class="row">
@@ -302,5 +304,67 @@
         </div>
     </div>
 </div>
+
+    <script type="text/javascript">
+
+
+
+        $.ajaxSetup({
+
+            headers: {
+
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+
+            }
+
+        });
+
+
+
+        $(".calculate").click(function(e){
+
+
+
+            e.preventDefault();
+
+
+
+            var country = $("input[name=country]").val();
+
+            var city = $("input[name=city]").val();
+
+            var length = $("input[name=length]").val();
+
+            var width = $("input[name=width]").val();
+
+            var height = $("input[name=height]").val();
+
+
+
+            $.ajax({
+
+                type:'POST',
+
+                url:'/calculateshippings',
+
+                data:{country:country, city:city, length:length,width:width,height:height, "_token": "{{ csrf_token() }}",},
+
+                success:function(data){
+
+                    alert(data.success);
+
+                }
+
+            });
+
+
+
+        });
+
+    </script>
+
+
+
+
     </body>
 </html>
