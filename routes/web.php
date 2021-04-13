@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::post('/calculateshippings', [App\Http\Controllers\ShippingController::class, 'calculateShipping'])->name('calculateShipping');
+Route::get('/dashboard', [App\Http\Controllers\ShippingController::class, 'dashboard']);
 
 
 

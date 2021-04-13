@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipping;
 use Illuminate\Http\Request;
-
+use Shippo;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 class ShippingController extends Controller
 {
     /**
@@ -19,7 +21,61 @@ class ShippingController extends Controller
 
     public function calculateShipping(Request $request)
     {
-       echo $request->country;
+
+        $request->validate([
+            'country' => 'required|string',
+            'city' => 'required|string',
+            'length' => 'required|integer',
+            'weight' => 'required|integer',
+            'width' => 'required|integer',
+            'height' => 'required|integer',
+        ]);
+        Shippo::setApiKey("shippo_live_6b99157b14c1d754acde698663d67c746ab797ab");
+
+        $fromAddress = array(
+            'name' => 'Shawn Ippotle',
+            'street1' => '12428 NE Haley st.',
+            'city' => 'Portland',
+            'state' => 'OR',
+            'zip' => '97230',
+            'country' => 'US',
+            'phone' => '+1 555 341 9393',
+            'email' => 'shippotle@goshippo.com'
+        );
+
+        $toAddress = array(
+            'name' => 'Mr Hippo"',
+            'street1' => 'Broadway 1',
+            'city' => $request->city,
+            'state' => 'NY',
+            'zip' => '10007',
+            'country' => $request->country,
+            'phone' => '+1 555 341 9393',
+            'email' => 'mrhippo@goshippo.com'
+        );
+
+        $parcel_1 = array(
+            'length'=> $request->length,
+            'width'=> $request->width,
+            'height'=> $request->height,
+            'distance_unit'=> 'in',
+            'weight'=> $request->weight,
+            'mass_unit'=> 'lb',
+        );
+
+
+        $shipment = \Shippo_Shipment::create(
+            array(
+                "address_from" => $fromAddress,
+                "address_to" => $toAddress,
+                "parcels" => array($parcel_1),
+                "async" => false
+            )
+        );
+        $rates = $shipment;
+            echo $rates ;
+
+
     }
 
     /**
@@ -27,6 +83,15 @@ class ShippingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dashboard()
+    {
+        $userid= Auth::user()->name;
+
+//        return view('dashboard', $userid);
+        return \View::make('dashboard')->with('userid', $userid);
+//        return view('dashboard',compact('userid', ));
+    }
+
     public function create()
     {
         //

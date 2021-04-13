@@ -1,23 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <div class="row">
 
-                    {{ __('You are logged in!') }}
-                </div>
+            <div class="dashboard ">
+
+            <div class="col-md-4 ">
+                <h1 id="dash" class="p-5">dash</h1>
+            </div>
+            </div>
+            <i class="fas fa-sign-in-alt fa-3x"></i>
+            <div class="content">
+            <div class="col-md-7">
+                content
+            </div>
             </div>
         </div>
     </div>
-</div>
+    <script type="text/javascript">
+        $(".fa-sign-in-alt").click(function(){
+            $('.dashboard').fadeToggle();
+
+
+        });
+        $('#dash').click(function (){
+            $('.content').load('./dashboard');
+        });
+    </script>
+
 @endsection

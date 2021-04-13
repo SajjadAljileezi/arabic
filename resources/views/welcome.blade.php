@@ -9,13 +9,15 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         <!-- Fonts -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     </head>
     <body>
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top pt-3  bg-red">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top   bg-red">
         <a class="navbar-brand" href="#">سندباد</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,7 +37,7 @@
 
             @if (Route::has('login'))
                 @auth
-                    <a href="{{ url('/home') }}" class="btn btn-outline-success my-2 my-sm-0">Home</a>
+                    <a href="{{ url('/home') }}" class="btn btn-outline-success my-2 my-sm-0">العمليات</a>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-outline-success mr-2 my-2 my-sm-0">تسجيل الدخول</a>
 {{--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>--}}
@@ -120,7 +122,7 @@
         </div>
     </div>
 {{--How it works --}}
-<div class="shipway pb-5">
+<div class="shipway ">
 
         <h1 class="text-center p-5 ">كيف نعمل </h1>
         <div class="row ">
@@ -238,7 +240,15 @@
         <div class="container">
             <h1 class="text-center p-5 ">حاسبة الشحن </h1>
             <div class="row">
-                <div class="col-lg-6"></div>
+
+                <div class="col-lg-6" id="projects">
+                    <div class="loadingio-spinner-spinner-1xm4wm9id87 displaySpiner"><div class="ldio-rs1matucqzk">
+                            <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                        </div></div>
+
+
+                </div>
+
                 <div class="col-lg-6">
                     <form>
 
@@ -249,15 +259,17 @@
                             <input type="text" name="city" class=" text-right form-control" placeholder="المدينة">
                         </div>
                         <div class="col pt-3 ">
-                            <input type="text" name="length"  class=" text-right form-control" placeholder="الطول">
+                            <input type="text" name="weight"  class=" text-right form-control" placeholder="(باون)  الوزن">
+                        </div><div class="col pt-3 ">
+                            <input type="text" name="length"  class=" text-right form-control" placeholder="الطول (انج)  ">
                         </div>
                         <div class="col pt-3">
-                            <input type="text" name="width" class="text-right form-control" placeholder="العرض">
+                            <input type="text" name="width" class="text-right form-control" placeholder=" (انج)  العرض">
                         </div><div class="col pt-3">
-                            <input type="text" name="height" class="text-right form-control" placeholder="الارتفاع">
+                            <input type="text" name="height" class="text-right form-control" placeholder=" (انج)  الارتفاع">
                         </div>
-
-                        <button   type="button" class="btn calculate save float-right btn-warning mt-4">احسب</button>
+{{--                        <div class="g-recaptcha" data-sitekey="6LdH8qEaAAAAAMNsVBJmOfnB8CPcTRaco8esFb5i"></div>--}}
+                        <button   id="btnSubmit" type="button" class="btn calculate save float-right btn-warning mt-4">احسب</button>
                     </form>
 
                 </div>
@@ -333,6 +345,8 @@
 
             var city = $("input[name=city]").val();
 
+            var weight = $("input[name=weight]").val();
+
             var length = $("input[name=length]").val();
 
             var width = $("input[name=width]").val();
@@ -344,23 +358,79 @@
             $.ajax({
 
                 type:'POST',
-
+                dataType: "json",
                 url:'/calculateshippings',
 
-                data:{country:country, city:city, length:length,width:width,height:height, "_token": "{{ csrf_token() }}",},
+                data:{country:country, city:city,weight:weight, length:length,width:width,height:height, "_token": "{{ csrf_token() }}",},
 
-                success:function(data){
+                success: function(msg){
+                     console.log(typeof(msg));
+                      // console.log(msg);
 
-                    alert(data.success);
+                     var rateed =msg.rates;
+                     console.log(rateed);
+                    var html_to_append = '';
 
+                     $.each( rateed, function(i, item) {
+                        console.log( item.amount, item.provider );
+                        // const company = item.provider;
+                         var amount= item.amount;
+                          var days =item.estimated_days;
+                          var imaged =item.provider_image_75;
+                         html_to_append +=  `<div class="col-lg-4 font-weight-bolder bg-tomato company mt-3 ">${item.provider} <p class="" style="
+    display: inline-table;
+    margin-left: 7px;
+    font-weight: 600;">  الشركة</p>      </div>` +
+                             `<div class="col-lg-4 company "> ${item.amount}  <p class="" style="
+    display: inline-table;
+    margin-left: 7px;
+    font-weight: 600;"> المبلغ </p>     </div>` +
+                         `<div class="col-lg-4 company">${item.estimated_days} <p class="" style="
+    display: inline-table;
+    margin-left: 7px;
+    font-weight: 600;"> عدد الايام </p>    </div>`;
+                         $('.displaySpiner').removeClass('displaySpiner');
+                         $("#projects").html(html_to_append)
+                         // $(".amount").html(item.amount);
+                         // $(".days").html(item.days);
+                         // $(".imaged").html(item.imaged);
+                    });
+
+                    // var html_to_append = '';
+                    // $.each( JSON.parse(msg) , function(i, item) {
+                    //     html_to_append +=
+                    //         '<div class="col-3 mb-3"><div class="text-uppercase"><p>' +
+                    //         i .provider +
+                    //         '<div class="col-3 mb-3"><div class="ext-uppercase"><p>' +
+                    //         i.amount +
+                    //         '</p></div><img  class="image img-fluid" src="' +
+                    //         i.estimated_days +
+                    //         '" /><p class="company">' +
+                    //         i.arrives_by +
+                    //         '</p></div>';
+                    // });
+                    // $("#projects").html(html_to_append);
+                },
+
+
+
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
+                    window.location.reload(true);
                 }
+
 
             });
 
 
 
         });
-
+        $(document).ready(function() {
+            $("#btnSubmit").click(function(){
+                $('.displaySpiner').removeClass('displaySpiner');
+            });
+        });
     </script>
 
 
