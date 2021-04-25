@@ -6,7 +6,7 @@ use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Shippo;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Response;
+use App\Models\Item;
 class ShippingController extends Controller
 {
     /**
@@ -16,7 +16,10 @@ class ShippingController extends Controller
      */
     public function index()
     {
-        //
+        $userid=Auth::user()->id;
+        $getItems = Item::where('userid',$userid)->where('arrived', '=', 1)->get();
+        return view("shipping", [ "getItems" => $getItems ]);
+
     }
 
     public function calculateShipping(Request $request)

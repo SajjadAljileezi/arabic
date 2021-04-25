@@ -322,41 +322,19 @@
 
 
         $.ajaxSetup({
-
             headers: {
-
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-
             }
-
         });
-
-
-
         $(".calculate").click(function(e){
-
-
-
             e.preventDefault();
-
-
-
             var country = $("input[name=country]").val();
-
             var city = $("input[name=city]").val();
-
             var weight = $("input[name=weight]").val();
-
             var length = $("input[name=length]").val();
-
             var width = $("input[name=width]").val();
-
             var height = $("input[name=height]").val();
-
-
-
             $.ajax({
-
                 type:'POST',
                 dataType: "json",
                 url:'/calculateshippings',
@@ -366,11 +344,9 @@
                 success: function(msg){
                      console.log(typeof(msg));
                       // console.log(msg);
-
                      var rateed =msg.rates;
                      console.log(rateed);
                     var html_to_append = '';
-
                      $.each( rateed, function(i, item) {
                         console.log( item.amount, item.provider );
                         // const company = item.provider;
