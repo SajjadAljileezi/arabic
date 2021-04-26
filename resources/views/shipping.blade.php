@@ -21,28 +21,28 @@
                  </thead>
                  <tbody>
                  <tr>
-                     <th scope="row">حجم متوسط</th>
+                     <th scope="row" >حجم متوسط</th>
                      <td>٥٠</td>
                      <td>١٨</td>
                      <td>١٨</td>
                      <td>١٦</td>
-                     <td><i class="fab fa-get-pocket  "></i></td>
+                     <td><button name="md" id=" " type="button" class="btn btn-success submitBox ">اضف</button></td>
                  </tr>
                  <tr>
-                     <th scope="row">حجم كبير</th>
+                     <th scope="row" >حجم كبير</th>
                      <td>٥٥</td>
                      <td>١٨</td>
                      <td>١٨</td>
                      <td>٢٤</td>
-                     <td><i class="fab fa-get-pocket"></i></td>
+                     <td><button name="l" id=" " type="button" class="btn btn-success submitBox ">اضف</button></td>
                  </tr>
                  <tr>
-                     <th scope="row">حجم كبير جدا</th>
+                     <th scope="row" >حجم كبير جدا</th>
                      <td>٦٠</td>
                      <td>٢٤</td>
                      <td>١٨</td>
                      <td>٢٤</td>
-                     <td><i class="fab fa-get-pocket"></i></td>
+                     <td><button name="xl" id="" type="button" class="btn btn-success submitBox ">اضف</button></td>
                  </tr>
                  </tbody>
              </table>
@@ -102,5 +102,42 @@
          </div>
      @endif
 
+     <script type="text/javascript">
+         $.ajaxSetup({
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             }
+         });
+         $(".submitBox").click(function(e){
+             e.preventDefault();
+             var size = {'size': this.name};
 
+             $.ajax({
+                 type:'POST',
+                 dataType: "json",
+                 url:'/box',
+
+                 data:{size, "_token": "{{ csrf_token() }}",},
+
+                 success: function(){
+                     window.location.reload(true);
+                 },
+                 error: function(xhr, status, error) {
+                     var err = eval("(" + xhr.responseText + ")");
+                     alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
+                     window.location.reload(true);
+                 }
+
+
+             });
+
+
+
+         })
+
+
+
+
+
+     </script>
 @endsection

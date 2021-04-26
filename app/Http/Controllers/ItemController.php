@@ -18,6 +18,13 @@ class ItemController extends Controller
         $getItems = Item::where('userid',$userid)->get();
         return view("home", [ "getItems" => $getItems ]);
     }
+    public function box(Request $request)
+    {
+      if($request->size ==='l'){
+          return true;
+      }
+
+    }
 
     /**
      * Show the form for creating a new resource.

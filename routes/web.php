@@ -28,5 +28,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/ship', [App\Http\Controllers\ShippingController::class, 'index'])->name('ship');
 Route::get('/home', [App\Http\Controllers\ItemController::class, 'index'])->name('getitem');
 Route::post('/item', [App\Http\Controllers\ItemController::class, 'store']);
+Route::post('/box', [App\Http\Controllers\ItemController::class, 'box']);
 Route::put('updateitem/{id}', [App\Http\Controllers\ItemController::class, 'update']);
 Route::delete('deleteitem/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('deleteProduct');
