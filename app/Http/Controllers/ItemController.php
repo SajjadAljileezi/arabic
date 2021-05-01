@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BosexCarts;
 use App\Models\Item;
+use App\Models\Boxes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
@@ -18,22 +20,35 @@ class ItemController extends Controller
         $getItems = Item::where('userid',$userid)->get();
         return view("home", [ "getItems" => $getItems ]);
     }
-    public function box(Request $request)
+    public function box(Request  $request)
     {
-      if($request->size ==='l'){
-          return true;
-      }
-
+        $dataBox['userid'] = Auth::user()->id;
+    $size = $request->size;
+    $addBoxs= Boxes::where('type',$size)->get();
+    foreach ($addBoxs as $addBox ){
+    $dataBox['type']=$addBox->type ;
+    $dataBox['weight']=$addBox->weight;
+    $dataBox['height']=$addBox->height;
+    $dataBox['length']=$addBox->length;
+    $dataBox['width']=$addBox->width;
     }
+        BosexCarts::create($dataBox);
+        $response = array(
 
+            'status' => 'success',
+            'msg'    => 'customer created successfully',
+        );
+
+        return json_encode($response);
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function  create()
     {
-        //
+
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BosexCarts;
+use App\Models\Boxes;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Shippo;
@@ -18,7 +20,9 @@ class ShippingController extends Controller
     {
         $userid=Auth::user()->id;
         $getItems = Item::where('userid',$userid)->where('arrived', '=', 1)->get();
-        return view("shipping", [ "getItems" => $getItems ]);
+        $boxes= Boxes::all();
+
+        return view("shipping", [ "getItems" => $getItems ],[ "boxes" => $boxes ]);
 
     }
 

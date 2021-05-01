@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Boxes extends Model
+class Measure extends Model
 {
-    protected $fillable = [
-           'weight','height','length','width','type'
-    ];
+    use HasFactory;
 }
