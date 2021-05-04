@@ -29,5 +29,6 @@ Route::get('/ship', [App\Http\Controllers\ShippingController::class, 'index'])->
 Route::get('/home', [App\Http\Controllers\ItemController::class, 'index'])->name('getitem');
 Route::post('/item', [App\Http\Controllers\ItemController::class, 'store']);
 Route::post('/box', [App\Http\Controllers\ItemController::class, 'box']);
+Route::post('/addtobox', [App\Http\Controllers\ItemController::class, 'addtobox']);
 Route::put('updateitem/{id}', [App\Http\Controllers\ItemController::class, 'update']);
 Route::delete('deleteitem/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('deleteProduct');

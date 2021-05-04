@@ -18,6 +18,7 @@ class CreateMeasuresTable extends Migration
             $table->unsignedBigInteger('bosex_id');
             $table->string('userid');
             $table->string('company');
+            $table->string('size');
             $table->string('tracking');
             $table->integer('weight');
             $table->integer('height');

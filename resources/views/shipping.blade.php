@@ -70,28 +70,29 @@
 
                             <tbody>
 
-                            <tr>
+                            <tr id="warning">
 
 
-                                <td class="showItem">{{ $getItem->company }}</td>
+                                <th class='pd-company'>{{ $getItem->company }}</th>
 
-                                <td class="showItem">{{ $getItem->tracking }}</td>
+                                <th class='pd-tracking' >{{ $getItem->tracking }}</th>
 
-                                <th scope="row" class="showItem">{{ $getItem->weight }}  </th>
-                                <th scope="row" class="showItem">{{ $getItem->length }}   </th>
-                                <th scope="row" class="showItem">{{ $getItem->width }}   </th>
+                                <th scope="row" class='pd-weight'>{{ $getItem->weight }}  </th>
+                                <th scope="row" class='pd-length'>{{ $getItem->length }}   </th>
+                                <th scope="row" class='pd-width'>{{ $getItem->width }}   </th>
+                                <th scope="row" class='pd-height'>{{ $getItem->height }}   </th>
 
-                                <th scope="row" class="showItem">
-                                    <select class="custom-select ">
+                                <th scope="row" >
+                                    <select id="" class="custom-select size ">
                                         @forelse (\App\Models\BosexCarts::where('userid',Auth::user()->id)->get() as
                                         $bosex)
-                                            <option selected>{{ $bosex->type }} ({{ $loop->index +1}})</option>
+                                            <option class="pd-measure" selected>{{ $bosex->type }} ({{ $loop->index +1}})</option>
                                         @empty
                                             <option value="1"> اختر صندوق من فوق</option>
                                         @endforelse
                                     </select></th>
                                 <th scope="row" class="showItem">
-                                    <button name="" id="" type="button" class="btn btn-primary">اضف</button>
+                                    <button name="" id="" type="button" class="btn btn-primary submitMeasure">اضف</button>
                                 </th>
                             </tbody>
 
@@ -135,7 +136,39 @@
                 });
 
 
-            })
+            }),
+
+            $(".submitMeasure").click('change',function (e) {
+                var currentRow = $(this).closest("tr");
+                var company = currentRow.find(".pd-company").html();
+                var tracking = currentRow.find(".pd-tracking").html();
+                var weight = currentRow.find(".pd-weight").html();
+                var length = currentRow.find(".pd-length").html();
+                var width = currentRow.find(".pd-width").html();
+                var height = currentRow.find(".pd-height").html();
+                var size = currentRow.find(":selected").html();
+
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                url: '/addtobox',
+
+                data:{company:company, tracking:tracking,weight:weight, length:length,width:width, height:height, size:size, "_token": "{{ csrf_token() }}",},
+
+                success: function () {
+                    // window.location.reload(true);
+                },
+                error: function (xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
+                    // window.location.reload(true);
+                }
+
+
+            });
+            });
+
+
 
 
         </script>

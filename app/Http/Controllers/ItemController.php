@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BosexCarts;
 use App\Models\Item;
 use App\Models\Boxes;
+use App\Models\Measure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
@@ -97,6 +98,37 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
+    public function addtobox(Request $request)
+    {
+//       $id= Auth::user()->id;
+             $size= $request->size;
+//        $items= Measure::where('userid', '=', $id)->where('size',$size)->get();
+//        $boxSize = $items->size ;
+//        $weight = $items->weight ;
+//        $length = $items->length ;
+//        $width = $items->width ;
+//        $height = $items->height ;
+//
+//        $boxSizeFrom= $request->size;
+//        $weightFrom= $request->weight;
+//        $lengthFrom= $request->length;
+//        $widthFrom= $request->width;
+//        $heightFrom= $request->height;
+
+        $originalBoxSizeFrom = preg_replace(  "/[^a-zA-Z]/",  '', $size);
+        $getBoxOriginalsize= Boxes::where('type', '=', $originalBoxSizeFrom)->get();
+        $originalBoxSizes =$getBoxOriginalsize->size;
+        $originalBoxWeight =$getBoxOriginalsize->weight;
+        $originalBoxLength =$getBoxOriginalsize->length;
+        $originalBoxWidth =$getBoxOriginalsize->width;
+        $originalBoxHeight =$getBoxOriginalsize->height;
+
+//        if ($items === !null) {
+//            // user doesn't exist
+//        }
+        return $originalBoxSize ;
+    }
+
     public function edit(Item $item)
     {
         //
