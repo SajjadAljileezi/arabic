@@ -15,7 +15,6 @@ class CreateMeasuresTable extends Migration
     {
         Schema::create('measures', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('bosex_id');
             $table->string('userid');
             $table->string('company');
             $table->string('size');

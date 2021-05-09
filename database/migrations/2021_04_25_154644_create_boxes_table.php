@@ -15,7 +15,7 @@ class CreateBoxesTable extends Migration
     {
         Schema::create('boxes', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
+            $table->string('size');
             $table->integer('weight');
             $table->integer('height');
             $table->integer('length');

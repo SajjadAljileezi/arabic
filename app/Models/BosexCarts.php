@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class BosexCarts extends Model
 {
     protected $fillable = [
-        'userid' ,'weight','height','length','width','type'
+        'userid' ,'weight','height','length','width','size'
     ];
     public function measure()
     {

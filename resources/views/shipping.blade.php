@@ -25,13 +25,13 @@
                         @foreach ($boxes as $box)
                             <tbody>
                             <tr>
-                                <th scope="row">{{ $box->type }}</th>
+                                <th scope="row">{{ $box->size }}</th>
                                 <td>{{ $box->weight }}</td>
                                 <td>{{ $box->height }}</td>
                                 <td>{{ $box->length }}</td>
                                 <td>{{ $box->width }}</td>
                                 <td>
-                                    <button name="{{ $box->type }}" id="" type="button"
+                                    <button name="{{ $box->size }}" id="" type="button"
                                             class="btn btn-success submitBox ">اضف
                                     </button>
                                 </td>
@@ -86,7 +86,8 @@
                                     <select id="" class="custom-select size ">
                                         @forelse (\App\Models\BosexCarts::where('userid',Auth::user()->id)->get() as
                                         $bosex)
-                                            <option class="pd-measure" selected>{{ $bosex->type }} ({{ $loop->index +1}})</option>
+                                            <option class="pd-measure" selected>{{ $bosex->size }} ({{ $loop->index
+                                            +1}})</option>
                                         @empty
                                             <option value="1"> اختر صندوق من فوق</option>
                                         @endforelse
@@ -129,7 +130,7 @@
                     error: function (xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");
                         alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
-                        window.location.reload(true);
+                        // window.location.reload(true);
                     }
 
 

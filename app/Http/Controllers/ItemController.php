@@ -25,9 +25,9 @@ class ItemController extends Controller
     {
         $dataBox['userid'] = Auth::user()->id;
     $size = $request->size;
-    $addBoxs= Boxes::where('type',$size)->get();
+    $addBoxs= Boxes::where('size',$size)->get();
     foreach ($addBoxs as $addBox ){
-    $dataBox['type']=$addBox->type ;
+    $dataBox['size']=$addBox->size ;
     $dataBox['weight']=$addBox->weight;
     $dataBox['height']=$addBox->height;
     $dataBox['length']=$addBox->length;
@@ -100,34 +100,73 @@ class ItemController extends Controller
      */
     public function addtobox(Request $request)
     {
-//       $id= Auth::user()->id;
-             $size= $request->size;
-//        $items= Measure::where('userid', '=', $id)->where('size',$size)->get();
-//        $boxSize = $items->size ;
-//        $weight = $items->weight ;
-//        $length = $items->length ;
-//        $width = $items->width ;
-//        $height = $items->height ;
-//
-//        $boxSizeFrom= $request->size;
-//        $weightFrom= $request->weight;
-//        $lengthFrom= $request->length;
-//        $widthFrom= $request->width;
-//        $heightFrom= $request->height;
+       $id= Auth::user()->id;
+          $size= $request->size;
+        $boxSizeFrom= $request->size;
+        $weightFrom= $request->weight;
+        $lengthFrom= $request->length;
+        $widthFrom= $request->width;
+        $heightFrom= $request->height;
+        $companyFrom= $request->company;
+        $trackingFrom= $request->tracking;
+
+
+                $items= Measure::where('userid', '=', $id)->where('size','=', $size)->get();
+                $weight = $items->sum('weight');
+                $length = $items->sum('length');
+                $width = $items->sum('width');
+                $height = $items->sum('height');
 
         $originalBoxSizeFrom = preg_replace(  "/[^a-zA-Z]/",  '', $size);
-        $getBoxOriginalsize= Boxes::where('type', '=', $originalBoxSizeFrom)->get();
-        $originalBoxSizes =$getBoxOriginalsize->size;
-        $originalBoxWeight =$getBoxOriginalsize->weight;
-        $originalBoxLength =$getBoxOriginalsize->length;
-        $originalBoxWidth =$getBoxOriginalsize->width;
-        $originalBoxHeight =$getBoxOriginalsize->height;
+        $getBoxOriginalsizes= Boxes::where('size', '=', $originalBoxSizeFrom)->get();
+        foreach($getBoxOriginalsizes as $getBoxOriginalsize ) {
+            $originalBoxSizes = $getBoxOriginalsize->size;
+            $originalBoxWeight = $getBoxOriginalsize->weight;
+            $originalBoxLength = $getBoxOriginalsize->length;
+            $originalBoxWidth = $getBoxOriginalsize->width;
+            $originalBoxHeight = $getBoxOriginalsize->height;
+        }
 
-//        if ($items === !null) {
-//            // user doesn't exist
-//        }
-        return $originalBoxSize ;
-    }
+        $addSizeToDb= $boxSizeFrom;
+        $addWeightToDb=  $weight +  $weightFrom; // = 30
+        $addLengthToDb=  $length + $lengthFrom ;
+        $addWidthToDb=  $width + $widthFrom;
+        $addHeightToDb=  $height + $heightFrom;
+
+        if ( $originalBoxWeight  >  $addWeightToDb &&
+            $originalBoxLength >  $addLengthToDb    &&
+            $originalBoxWidth >  $addWidthToDb  &&
+            $originalBoxHeight  > $addHeightToDb  )
+        {
+            $data['weight'] = $weightFrom;
+            $data['length'] = $lengthFrom;
+            $data['width'] = $widthFrom;
+            $data['height'] = $heightFrom;
+            $data['userid'] = $id;
+            $data['size'] = $size;
+            $data['company'] = $companyFrom;
+            $data['tracking'] = $trackingFrom;
+            Measure::create($data);
+
+            $deleteItem = Item::findOrFail($trackingFrom);
+            $deleteItem->delete();
+            $response = array(
+
+                'status' => 'success',
+                'msg'    => 'customer created successfully',
+            );
+
+            return json_encode($response);
+
+        }
+        else{
+           echo('please check the size, weight and hieght');
+        }
+                }
+
+
+
+
 
     public function edit(Item $item)
     {
