@@ -16,7 +16,7 @@ class CreateBosexCartsTable extends Migration
         Schema::create('bosex_carts', function (Blueprint $table) {
             $table->id();
             $table->string('userid');
-            $table->string('type');
+            $table->string('size');
             $table->integer('weight');
             $table->integer('height');
             $table->integer('length');

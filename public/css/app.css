@@ -10268,20 +10268,6 @@ h5.title3 {
   color: tomato;
 }
 
-.dashboard {
-  background-color: #1a202c;
-  color: #2d995b;
-  height: 75rem;
-  width: 15rem;
-  margin-top: -1.5rem;
-  z-index: 0;
-  box-shadow: inset 0px 0px 8px 2px #6c757d;
-}
-
-.dashboard h1:hover {
-  color: #1d68a7;
-}
-
 .fa-sign-in-alt:hover {
   color: #269422;
 }
@@ -10300,16 +10286,6 @@ h5.title3 {
 
 .notarrived {
   color: darkred;
-}
-
-.ship {
-  text-decoration: none;
-  color: #269422;
-}
-
-h1 .ship {
-  color: #2d995b;
-  text-underline: none;
 }
 
 .fa-get-pocket:hover {

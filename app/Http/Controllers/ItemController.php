@@ -111,11 +111,14 @@ class ItemController extends Controller
         $trackingFrom= $request->tracking;
 
 
-                $items= Measure::where('userid', '=', $id)->where('size','=', $size)->get();
-                $weight = $items->sum('weight');
-                $length = $items->sum('length');
-                $width = $items->sum('width');
-                $height = $items->sum('height');
+                         $items= Measure::where('userid', '=', $id)->where('size','=', $size)->get();
+                         $weight = $items->sum('weight');
+                         $length = $items->sum('length');
+                         $width = $items->sum('width');
+                         $height = $items->sum('height');
+
+
+
 
         $originalBoxSizeFrom = preg_replace(  "/[^a-zA-Z]/",  '', $size);
         $getBoxOriginalsizes= Boxes::where('size', '=', $originalBoxSizeFrom)->get();
@@ -146,10 +149,11 @@ class ItemController extends Controller
             $data['size'] = $size;
             $data['company'] = $companyFrom;
             $data['tracking'] = $trackingFrom;
-            Measure::create($data);
 
-            $deleteItem = Item::findOrFail($trackingFrom);
-            $deleteItem->delete();
+                Measure::create($data);
+
+             Item::where('tracking', $trackingFrom)->firstorfail()->delete();
+
             $response = array(
 
                 'status' => 'success',
@@ -160,12 +164,15 @@ class ItemController extends Controller
 
         }
         else{
-           echo('please check the size, weight and hieght');
+           echo('تاكد من الحجم والوزن والارتفاع');
         }
                 }
 
 
-
+    public function return(Request $request)
+    {
+        echo $request->id;
+    }
 
 
     public function edit(Item $item)

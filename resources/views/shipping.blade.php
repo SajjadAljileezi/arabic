@@ -43,7 +43,6 @@
             @endif
 
             <div class="col-md-12">
-                <h4 class="py-5"> اشحن عن طريق القطعة الواحدة</h4>
                 @if(   $getItems->count() < 1)
                     <h4>لايوجد شحنات واصله للمخزن </h4>
                 @else
@@ -99,13 +98,48 @@
 
                         @endforeach
                     </table>
-
-                    {{--                <div class="col-1">--}}
-                    {{--                    <button id="submitEditItem" data-toggle="modal" type="button" data-target="{{ $getItem->id }}" class="btn btn-danger float-right editItem  ">عدل</button>--}}
-                    {{--                </div>--}}
             </div>
         </div>
         @endif
+        <hr>
+        <h4 class="m-5"> الصناديق الجاهزة للشحن</h4>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">شركة الشحن</th>
+                <th scope="col">رقم التعقب</th>
+                <th scope="col">الوزن (باوند)</th>
+                <th scope="col">طول (انج)</th>
+                <th scope="col">عرض (انج)</th>
+                <th scope="col">ارتفاع (انج)</th>
+                <th scope="col"> الصندوق</th>
+            </tr>
+            </thead>
+            @forelse (\App\Models\Measure::where('userid',Auth::user()->id)->get() as
+                                       $readybox)
+            <tbody>
+            <tr>
+
+                <th class='pd '>{{ $readybox->company }}</th>
+
+                <th class='pd ' >{{ $readybox->tracking }}</th>
+
+                <th scope="row" class='pd '>{{ $readybox->weight }}  </th>
+                <th scope="row" class='pd '>{{ $readybox->length }}   </th>
+                <th scope="row" class='pd '>{{ $readybox->width }}   </th>
+                <th scope="row" class='pd '>{{ $readybox->height }}   </th>
+                <th scope="row" class='pd '>{{ $readybox->size }}   </th>
+
+                <th scope="row" >
+                    <button name=" {{ $readybox->id }} " id="" type="button" class="btn btn-danger returnBox ">اعد</button>
+                </th>
+            </tr>
+
+            </tbody>
+            @empty
+                <h3> اضف شحناتك الي صناديق الشحن </h3>
+            @endforelse
+        </table>
 
         <script type="text/javascript">
             $.ajaxSetup({
@@ -156,13 +190,11 @@
 
                 data:{company:company, tracking:tracking,weight:weight, length:length,width:width, height:height, size:size, "_token": "{{ csrf_token() }}",},
 
-                success: function () {
-                    // window.location.reload(true);
+                success:function(response) {
+                  alert(response);
                 },
-                error: function (xhr, status, error) {
-                    var err = eval("(" + xhr.responseText + ")");
-                    alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
-                    // window.location.reload(true);
+                error: function(xhr,err){
+                    alert("تحذير "+xhr.responseText);
                 }
 
 
@@ -170,7 +202,31 @@
             });
 
 
+            $(".returnBox").click(function (e) {
+                e.preventDefault();
+                var id = {'id': this.name};
 
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: '/return',
+
+                    data: {id, "_token": "{{ csrf_token() }}",},
+
+                    success: function () {
+                        window.location.reload(true);
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
+                        // window.location.reload(true);
+                    }
+
+
+                });
+
+
+            })
 
         </script>
 @endsection

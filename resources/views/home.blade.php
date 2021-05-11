@@ -1,19 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div>
 
         <div class="row">
 
-            <div class="dashboard ">
 
-            <div class="col-md-4 ">
-                <h1 id="dash" class="px-5 pt-5"> الادارة</h1>
-                <a href="{{ route('ship') }}"> <h1 id="dash"  class="px-5 ship"> اشحن </h1></a>
-            </div>
-            </div>
 {{--            Add Items--}}
-            <i class="fas fa-sign-in-alt fa-3x"></i>
+
             <div class="m-5">
             <div class="col-lg-12">
                 <div class="content">

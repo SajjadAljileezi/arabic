@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BosexCarts;
 use App\Models\Boxes;
+use App\Models\Measure;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Shippo;
@@ -24,6 +25,12 @@ class ShippingController extends Controller
 
         return view("shipping", [ "getItems" => $getItems ],[ "boxes" => $boxes ]);
 
+    }
+    public function ready()
+    {
+        $id=Auth::user()->id;
+        $getReadys = Measure::where('userid',$id)->get();
+        return view("readytoship", [ "getReadys" => $getReadys ]);
     }
 
     public function calculateShipping(Request $request)
