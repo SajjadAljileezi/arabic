@@ -39,9 +39,7 @@
                 </div>
                 <hr class="m-5">
                 <h3 class="mb-5">الشحنات الموجودة (داخل امريكا) </h3>
-                @if(   $getItems->count() < 1)
-                    <h4>لايوجد شحنات في المخزن </h4>
-                @else
+
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -67,7 +65,6 @@
                     <tr>
 
 
-
                         <td class="showItem">{{ $getItem->company }}</td>
 
                         <td class="showItem">{{ $getItem->tracking }}</td>
@@ -81,17 +78,17 @@
                         @else
                             <td class="notarrived">  غير واصل للمخزن</td>
                         @endif
-                        <td> <i data-toggle="modal" data-target="#myModal{{$getItem->id}}" data-id="{{$getItem->id}}" class="fas editing fa-edit"></i></td>
+                        <td> <i data-toggle="modal" data-target=".myModal{{$getItem->id}}" data-id=" "
+                                class="fas editing fa-edit "> عدل </i></td>
+
                         <td><form method="POST" action="{{ route('deleteProduct', ['id' => $getItem->id]) }}">
                                 {{ csrf_field() }}
-                                {{ method_field('DELETE') }}  <button class="  btn-danger" onclick="return confirm('Are you sure?')" type="submit">Delete</button> </form> </td>
+                                {{ method_field('DELETE') }}  <button class="  btn-danger" onclick="return confirm
+                                ('Are you sure?')" type="submit">احذف</button> </form> </td>
 
                     </tr>
 
-                    </tbody>
 
-                    @endforeach
-                </table>
 
 {{--                <div class="col-1">--}}
 {{--                    <button id="submitEditItem" data-toggle="modal" type="button" data-target="{{ $getItem->id }}" class="btn btn-danger float-right editItem  ">عدل</button>--}}
@@ -100,12 +97,13 @@
             </div>
 
         </div>
-    @endif
+
         <!-- Button trigger modal -->
 
         <!-- Modal -->
-        @foreach ($getItems as $getItem)
-        <div class="modal fade" id="myModal{{$getItem->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal fade myModal{{$getItem->id}}" id=""   role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -160,11 +158,11 @@
 
             </div>
 
+
         </div>
-            @endforeach
 
     </div>
-
+        @endforeach
     <script type="text/javascript">
         $(".fa-sign-in-alt").click(function(){
             $('.dashboard').fadeToggle();

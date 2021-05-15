@@ -5,7 +5,8 @@
     <div class="container">
         <h1 class="py-5">اختر عملية الشحن </h1>
         <div class="row">
-            <div class="col-md-12">
+
+            <div class="col-md-6">
                 <h4>اشحن عن طريق التجميع في صناديق محددة</h4>
                 <h5 class="py-3"> الصناديق الموجودة لدينا</h5>
                 @if(   $boxes->count() < 1)
@@ -41,7 +42,10 @@
                     </table>
             </div>
             @endif
-
+            <div class="col-md-6">
+              <h4 class=" float-right"> محتويات الصندوق</h4>
+                {{ $returnBoxWeight ?? '' }}
+            </div>
             <div class="col-md-12">
                 @if(   $getItems->count() < 1)
                     <h4>لايوجد شحنات واصله للمخزن </h4>
@@ -103,6 +107,8 @@
         @endif
         <hr>
         <h4 class="m-5"> الصناديق الجاهزة للشحن</h4>
+
+
         <table class="table table-hover">
             <thead>
             <tr>
@@ -115,8 +121,7 @@
                 <th scope="col"> الصندوق</th>
             </tr>
             </thead>
-            @forelse (\App\Models\Measure::where('userid',Auth::user()->id)->get() as
-                                       $readybox)
+            @forelse (\App\Models\Measure::where('userid',Auth::user()->id)->get() as $readybox)
             <tbody>
             <tr>
 
@@ -137,7 +142,7 @@
 
             </tbody>
             @empty
-                <h3> اضف شحناتك الي صناديق الشحن </h3>
+                <h3> اضف شحناتك الى صناديق الشحن </h3>
             @endforelse
         </table>
 
@@ -190,11 +195,13 @@
 
                 data:{company:company, tracking:tracking,weight:weight, length:length,width:width, height:height, size:size, "_token": "{{ csrf_token() }}",},
 
-                success:function(response) {
-                  alert(response);
+                success:function( ) {
+                    alert( 'تم الاضافة بنجاح');
+                    // window.location.reload(true);
                 },
                 error: function(xhr,err){
                     alert("تحذير "+xhr.responseText);
+                    // window.location.reload(true);
                 }
 
 
@@ -214,12 +221,13 @@
                     data: {id, "_token": "{{ csrf_token() }}",},
 
                     success: function () {
+                        alert( 'تم الاعادة بنجاح');
                         window.location.reload(true);
                     },
                     error: function (xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");
-                        alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
-                        // window.location.reload(true);
+                        alert(" حصل خطا ما");
+                         window.location.reload(true);
                     }
 
 

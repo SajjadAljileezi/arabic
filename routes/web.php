@@ -32,5 +32,7 @@ Route::post('/box', [App\Http\Controllers\ItemController::class, 'box']);
 Route::post('/addtobox', [App\Http\Controllers\ItemController::class, 'addtobox']);
 Route::put('updateitem/{id}', [App\Http\Controllers\ItemController::class, 'update']);
 Route::delete('deleteitem/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('deleteProduct');
-Route::get('/readytoship', [App\Http\Controllers\ShippingController::class, 'ready'])->name('ready');
+Route::get('/readytoships', [App\Http\Controllers\ShippingController::class, 'ready'])->name('ready');
 Route::post('/return', [App\Http\Controllers\ItemController::class, 'return']);
+Route::get('/calculate', [App\Http\Controllers\ItemController::class, 'calculate']);
+

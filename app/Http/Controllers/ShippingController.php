@@ -30,7 +30,12 @@ class ShippingController extends Controller
     {
         $id=Auth::user()->id;
         $getReadys = Measure::where('userid',$id)->get();
-        return view("readytoship", [ "getReadys" => $getReadys ]);
+            foreach ($getReadys as $getReady )
+        $allSize = $getReady->size ;
+
+        $originalBoxSizeMeasure = preg_replace(  "/[^a-zA-Z]/",  '', $allSize);
+        dd($originalBoxSizeMeasure);
+        return view("readytoship", [ "originalBoxSizeMeasure" => $originalBoxSizeMeasure ]);
     }
 
     public function calculateShipping(Request $request)
