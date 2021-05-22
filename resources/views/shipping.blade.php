@@ -6,7 +6,7 @@
         <h1 class="py-5">اختر عملية الشحن </h1>
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h4>اشحن عن طريق التجميع في صناديق محددة</h4>
                 <h5 class="py-3"> الصناديق الموجودة لدينا</h5>
                 @if(   $boxes->count() < 1)
@@ -42,15 +42,47 @@
                     </table>
             </div>
             @endif
-            <div class="col-md-6">
-              <h4 class=" float-right"> محتويات الصندوق</h4>
-                {{ $returnBoxWeight ?? '' }}
+            <div class="col-md-12 ">
+              <h4 class="mt-5 "> احجام الصناديق</h4>
+                <br>
+                    <div class="row">
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">الصندوق</th>
+                                <th scope="col">الوزن</th>
+                                <th scope="col">الارتفاع</th>
+                                <th scope="col">الطول</th>
+                                <th scope="col">العرض</th>
+                            </tr>
+                            </thead>
+                            @foreach ($items as $item)
+                                <tbody>
+                                <tr>
+                                    <th scope="row">{{$item->size}}</th>
+                                    <td class="watchWeights">{{$item->weight}}</td>
+                                    <td class="watchWeight">{{$item->height}}</td>
+                                    <td class="watchWeight">{{$item->length}}</td>
+                                    <td class="watchWeight">{{$item->width}}</td>
+                                </tr>
+
+                                </tbody>
+                            @endforeach
+                        </table>
+                    </div>
+
+
+
+
+
+
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12 mt-5">
                 @if(   $getItems->count() < 1)
-                    <h4>لايوجد شحنات واصله للمخزن </h4>
+                    <h4>لايوجد شحنات او قطع    </h4>
                 @else
-                    <h5 class="mb-5">الشحنات الموجودة (داخل امريكا) </h5>
+                    <h5 class="mb-5">الشحنات الموجودة   </h5>
                     <hr>
 
                     <table class="table table-hover">
@@ -236,5 +268,53 @@
 
             })
 
+
+            // $(document).ready(function(){
+            //     var a = document.querySelector(".watchWeight").textContent;
+            //     console.log(a)
+            //     if(a > 10) {
+            //         $('.changable').addClass('backgroundred');
+            //     }
+            //     else if(a < 10) {
+            //         $('.changable').addClass('backgroundgreen');
+            //     }
+            //     else {
+            //         $('.changable').addClass('backgroundorange');
+            //     }
+            //
+            // });
+
+
+
+            $(document).ready(function(){
+                jQuery(".watchWeight").each(function(index, currentElement) {
+                  var current=  $(currentElement).text()
+                 console.log(current)
+                        if(current > 10) {
+                            $(this).addClass('backgroundred');
+                        }
+                        else if(current < 10) {
+                            $(this).addClass('backgroundgreen');
+                        }
+                        else {
+                            $(this).addClass('backgroundorange');
+                        }
+                });
+               });
+            $(document).ready(function(){
+                jQuery(".watchWeights").each(function(index, currentElement) {
+                  var current=  $(currentElement).text()
+                 console.log(current)
+                        if(current > 45) {
+                            $(this).addClass('backgroundred');
+                        }
+                        else if(current < 45) {
+                            $(this).addClass('backgroundgreen');
+                        }
+                        else {
+                            $(this).addClass('backgroundorange');
+                        }
+                });
+               });
         </script>
 @endsection

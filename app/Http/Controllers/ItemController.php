@@ -6,6 +6,7 @@ use App\Models\BosexCarts;
 use App\Models\Item;
 use App\Models\Boxes;
 use App\Models\Measure;
+Use Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
@@ -149,9 +150,8 @@ class ItemController extends Controller
             $data['company'] = $companyFrom;
             $data['tracking'] = $trackingFrom;
 
-                Measure::create($data);
-
-             Item::where('tracking', $trackingFrom)->firstorfail()->delete();
+            Measure::create($data);
+            Item::where('tracking', $trackingFrom)->firstorfail()->delete();
 
 
             $response = array(
@@ -166,10 +166,6 @@ class ItemController extends Controller
         else{
            echo('تاكد من الحجم والوزن والارتفاع');
         }
-
-
-
-
 
 
         }
@@ -220,43 +216,16 @@ class ItemController extends Controller
 //Calculate boxes in Measure
     public function calculate()
     {
-        echo ('hello');
+
         $id= Auth::user()->id;
-
-        $items= Measure::where('userid', '=', $id)->select('size','weight', Measure::raw( 'size','weight'))
-            ->groupBy('size','weight' )
-            ->havingRaw('COUNT(*) > 1')
-            ->get();
-
-        foreach ($items as $item){
-            $sizes= $item->size;
-            $lengths = $item->sum('length');
-            $widths = $item->sum('width');
-            $heights = $item->sum('height');
-            $weights = $item->sum('weight');
-        }
-
-        $originalBoxSizeFrom = preg_replace(  "/[^a-zA-Z]/",  '', $sizes);
-        $getBoxOriginalsizes= Boxes::where('size', '=', $originalBoxSizeFrom)->get();
-        foreach($getBoxOriginalsizes as $getBoxOriginalsize ) {
-            $originalBoxSizes = $getBoxOriginalsize->size;
-            $originalBoxWeight = $getBoxOriginalsize->weight;
-            $originalBoxLength = $getBoxOriginalsize->length;
-            $originalBoxWidth = $getBoxOriginalsize->width;
-            $originalBoxHeight = $getBoxOriginalsize->height;
-        }
-
-        $returnBoxWeight= $weights - $originalBoxWeight;
-        $returnBoxLength= $lengths - $originalBoxLength;
-        $returnBoxWidth= $widths - $originalBoxWidth;
-        $returnBoxHeight= $heights - $originalBoxHeight;
-        dd($returnBoxWeight, $sizes );
-
+        $getItems = Item::where('userid',$id)->get();
+        $items= Measure::where('userid', '=', $id)->selectRaw('size as size ,SUM(weight) as weight,SUM(height) as height,SUM(length) as length,SUM(width) as width', )
+        ->groupBy('size')->get();
+         return view('readytoship',compact('items','getItems' ));
         }
 
     public function edit(Item $item)
     {
-
 
     }
 

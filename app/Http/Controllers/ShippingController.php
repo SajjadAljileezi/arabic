@@ -22,8 +22,11 @@ class ShippingController extends Controller
         $userid=Auth::user()->id;
         $getItems = Item::where('userid',$userid)->where('arrived', '=', 1)->get();
         $boxes= Boxes::all();
+        $items= Measure::where('userid', '=', $userid)->selectRaw('size as size ,SUM(weight) as weight,SUM(height) as height,SUM(length) as length,SUM(width) as width', )
+            ->groupBy('size')->get();;
 
-        return view("shipping", [ "getItems" => $getItems ],[ "boxes" => $boxes ]);
+        return view('shipping',compact('items','boxes','getItems'));
+//        return view("shipping", [ "getItems" => $getItems ],[ "boxes" => $boxes ]);
 
     }
     public function ready()
@@ -104,11 +107,7 @@ class ShippingController extends Controller
      */
     public function dashboard()
     {
-        $userid= Auth::user()->name;
 
-//        return view('dashboard', $userid);
-        return \View::make('dashboard')->with('userid', $userid);
-//        return view('dashboard',compact('userid', ));
     }
 
     public function create()
