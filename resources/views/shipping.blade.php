@@ -289,7 +289,7 @@
             $(document).ready(function(){
                 jQuery(".watchWeight").each(function(index, currentElement) {
                   var current=  $(currentElement).text()
-                 console.log(current)
+
                         if(current > 10) {
                             $(this).addClass('backgroundred');
                         }
@@ -304,7 +304,6 @@
             $(document).ready(function(){
                 jQuery(".watchWeights").each(function(index, currentElement) {
                   var current=  $(currentElement).text()
-                 console.log(current)
                         if(current > 45) {
                             $(this).addClass('backgroundred');
                         }

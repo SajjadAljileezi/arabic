@@ -22,7 +22,7 @@
                 @foreach ($items as $item)
                 <tbody>
                 <tr>
-                    <th class='ct-size' >{{$item->size}}</th>
+                    <td class='ct-size' >{{$item->size}}</td>
                     <td class='ct-weight'>{{$item->weight}}</td>
                     <td class='ct-height'>{{$item->height}}</td>
                     <td class='ct-length'>{{$item->length}}</td>
@@ -64,6 +64,10 @@
                         <td>{{$getItem->height}}</td>
                         <td>{{$getItem->length}}</td>
                         <td>{{$getItem->width}}</td>
+                        <th scope="row" class="showItem">
+                            <button name="" id="" type="button" class="btn btn-success submitToCart"><i class="fas
+                        fa-cart-plus"></i> </button>
+                        </th>
                     </tr>
 
                     </tbody>
@@ -74,24 +78,23 @@
     </div>
 </div>
 <script type="text/javascript">
-        $(".submitMeasure").click('change',function (e) {
-            var size = currentRow.find(".pd-company").html();
-            var weight = currentRow.find(".pd-tracking").html();
-            var weight = currentRow.find(".pd-weight").html();
-            var length = currentRow.find(".pd-length").html();
-            var width = currentRow.find(".pd-width").html();
-            var height = currentRow.find(".pd-height").html();
-            var size = currentRow.find(":selected").html();
+        $(".submitToCart").click('change',function (e) {
+            var currentRow = $(this).closest("tr");
+            var weight = currentRow.find(".ct-weight").html();
+            var length = currentRow.find(".ct-length").html();
+            var width = currentRow.find(".ct-width").html();
+            var height = currentRow.find(".ct-height").html();
+            var size = currentRow.find(".ct-size").html();
 
             $.ajax({
                 type: 'POST',
                 dataType: "json",
-                url: '/addtobox',
+                url: '/cart',
 
-                data:{company:company, tracking:tracking,weight:weight, length:length,width:width, height:height, size:size, "_token": "{{ csrf_token() }}",},
+                data:{ weight:weight, length:length,width:width, height:height, size:size, "_token": "{{ csrf_token() }}",},
 
                 success:function( ) {
-                    alert( 'تم الاضافة بنجاح');
+                    alert( 'تم الاضافةالى السلة بنجاح');
                     // window.location.reload(true);
                 },
                 error: function(xhr,err){

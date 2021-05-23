@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BosexCarts;
 use App\Models\Boxes;
+use App\Models\Cart;
 use App\Models\Measure;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
@@ -99,7 +100,22 @@ class ShippingController extends Controller
 
 
     }
+    public function cart(Request $request){
+    $id=Auth::user()->id;
+    $size=$request->size;
+    $adddToCarts= Measure::where('size',$size)->where('userid',$id)->get();
+        dd($adddToCarts);
 
+Cart::create();
+$response = array(
+
+'status' => 'success',
+'msg'    => 'added to cart successfully',
+);
+
+return json_encode($response);
+
+}
     /**
      * Show the form for creating a new resource.
      *

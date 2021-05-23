@@ -40,16 +40,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <li class="nav-item">
-                            <a href="{{ route('ready') }}"> <h4   class=" m-2">  اشحن </h4></a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('ship') }}"> <h4   class=" m-2"> جمع </h4></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('getitem') }}"> <h4  class="m-2 "> الادارة</h4></a>
-                        </li>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -64,6 +55,16 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a href="{{ route('ready') }}"> <h4   class=" m-2">  اشحن </h4></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('ship') }}"> <h4   class=" m-2"> جمع </h4></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('getitem') }}"> <h4  class="m-2 "> الادارة</h4></a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
