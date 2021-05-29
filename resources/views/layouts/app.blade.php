@@ -55,6 +55,12 @@
                                 </li>
                             @endif
                         @else
+                            @if (count(\App\Models\Cart::where('userid',Auth::user()->id)->get()) > 0)
+                            <li class="nav-item">
+                                <a href="{{ route('cart') }}"> <h4   class=" m-2">  <i class="fas
+                        fa-cart-plus"></i> </h4></a>
+                            </li>
+                            @endif
                             <li class="nav-item">
                                 <a href="{{ route('ready') }}"> <h4   class=" m-2">  اشحن </h4></a>
                             </li>

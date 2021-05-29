@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Shippo;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+
 class ShippingController extends Controller
 {
     /**
@@ -20,26 +21,29 @@ class ShippingController extends Controller
      */
     public function index()
     {
-        $userid=Auth::user()->id;
-        $getItems = Item::where('userid',$userid)->where('arrived', '=', 1)->get();
-        $boxes= Boxes::all();
-        $items= Measure::where('userid', '=', $userid)->selectRaw('size as size ,SUM(weight) as weight,SUM(height) as height,SUM(length) as length,SUM(width) as width', )
+        $userid = Auth::user()->id;
+        $getItems = Item::where('userid', $userid)->where('arrived', '=', 1)->get();
+        $boxes = Boxes::all();
+        $items = Measure::where('userid', '=',
+            $userid)->selectRaw('size as size ,SUM(weight) as weight,SUM(height) as height,SUM(length) as length,SUM(width) as width',)
             ->groupBy('size')->get();;
 
-        return view('shipping',compact('items','boxes','getItems'));
+        return view('shipping', compact('items', 'boxes', 'getItems'));
 //        return view("shipping", [ "getItems" => $getItems ],[ "boxes" => $boxes ]);
 
     }
+
     public function ready()
     {
-        $id=Auth::user()->id;
-        $getReadys = Measure::where('userid',$id)->get();
-            foreach ($getReadys as $getReady )
-        $allSize = $getReady->size ;
+        $id = Auth::user()->id;
+        $getReadys = Measure::where('userid', $id)->get();
+        foreach ($getReadys as $getReady) {
+            $allSize = $getReady->size;
+        }
 
-        $originalBoxSizeMeasure = preg_replace(  "/[^a-zA-Z]/",  '', $allSize);
+        $originalBoxSizeMeasure = preg_replace("/[^a-zA-Z]/", '', $allSize);
         dd($originalBoxSizeMeasure);
-        return view("readytoship", [ "originalBoxSizeMeasure" => $originalBoxSizeMeasure ]);
+        return view("readytoship", ["originalBoxSizeMeasure" => $originalBoxSizeMeasure]);
     }
 
     public function calculateShipping(Request $request)
@@ -78,12 +82,12 @@ class ShippingController extends Controller
         );
 
         $parcel_1 = array(
-            'length'=> $request->length,
-            'width'=> $request->width,
-            'height'=> $request->height,
-            'distance_unit'=> 'in',
-            'weight'=> $request->weight,
-            'mass_unit'=> 'lb',
+            'length' => $request->length,
+            'width' => $request->width,
+            'height' => $request->height,
+            'distance_unit' => 'in',
+            'weight' => $request->weight,
+            'mass_unit' => 'lb',
         );
 
 
@@ -96,35 +100,82 @@ class ShippingController extends Controller
             )
         );
         $rates = $shipment;
-            echo $rates ;
+        echo $rates;
 
 
     }
-    public function cart(Request $request){
-    $id=Auth::user()->id;
-    $size=$request->size;
-    $adddToCarts= Measure::where('size',$size)->where('userid',$id)->get();
-        dd($adddToCarts);
 
-Cart::create();
-$response = array(
+    public function addToCart(Request $request)
+    {
+        $id = Auth::user()->id;
+        $size = $request->size;
+        $addToCarts = Measure::where('size', $size)->where('userid', $id)->get();
 
-'status' => 'success',
-'msg'    => 'added to cart successfully',
-);
 
-return json_encode($response);
+        foreach($addToCarts as $addToCart) {
+            $weight  = $addToCart->weight;
+            $height  = $addToCart->height;
+            $length  = $addToCart->length;
+            $width  = $addToCart->width;
+            $sizes  = $addToCart->size;
+            $userid  = $addToCart->userid;
 
-}
+            $addAll = array('userid' => $userid,'size' => $sizes,'weight' => $weight,'height' => $height
+            ,'width' => $width,'length' => $length);
+
+        Cart::create($addAll);
+        }
+//       $delete=  Measure::where('size', $size)->firstorfail()->delete();
+
+        $response = array(
+
+            'status' => 'success',
+            'msg' => 'added to cart successfully',
+        );
+
+        return json_encode($response);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function dashboard()
+    public function itemtocart(Request $request)
     {
+        $id = Auth::user()->id;
+        $tracking = $request->tracking;
+        $itemToCarts = Item::where('tracking', $tracking)->where('userid', $id)->get();
+        foreach($itemToCarts as $itemToCart) {
+            $weight  = $itemToCart->weight;
+            $height  = $itemToCart->height;
+            $length  = $itemToCart->length;
+            $width   = $itemToCart->width;
+            $tracking = $itemToCart->tracking;
+            $company  = $itemToCart->company;
+        }
+
+        $itemCard['height'] = $height;
+        $itemCard['weight'] = $weight;
+        $itemCard['length'] = $length;
+        $itemCard['width'] = $width;
+        $itemCard['company'] = $company;
+        $itemCard['size'] = $tracking;
+        $itemCard['userid'] = $id;
+
+        Cart::create($itemCard);
+        Item::where('tracking', $tracking)->firstorfail()->delete();
+        $response = array(
+
+            'status' => 'success',
+            'msg' => 'added to cart successfully',
+        );
+
+        return json_encode($response);
 
     }
+
 
     public function create()
     {

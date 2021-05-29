@@ -35,5 +35,7 @@ Route::delete('deleteitem/{id}', [App\Http\Controllers\ItemController::class, 'd
 //Route::get('/readytoships', [App\Http\Controllers\ShippingController::class, 'ready'])->name('ready');
 Route::post('/return', [App\Http\Controllers\ItemController::class, 'return']);
 Route::get('/readytoships', [App\Http\Controllers\ItemController::class, 'calculate'])->name('ready');
-Route::post('/cart', [App\Http\Controllers\ShippingController::class, 'cart']);
+Route::post('/cart', [App\Http\Controllers\ShippingController::class, 'addToCart']);
+Route::post('/itemcart', [App\Http\Controllers\ShippingController::class, 'itemtocart']);
+Route::get('/carts', [App\Http\Controllers\CartdController::class, 'index'])->name('cart');
 

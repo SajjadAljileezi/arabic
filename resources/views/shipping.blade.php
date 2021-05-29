@@ -42,6 +42,9 @@
                     </table>
             </div>
             @endif
+            @if(   $items->count() < 1)
+
+            @else
             <div class="col-md-12 ">
               <h4 class="mt-5 "> احجام الصناديق</h4>
                 <br>
@@ -74,7 +77,7 @@
 
 
 
-
+                @endif
 
 
             </div>
@@ -201,7 +204,7 @@
                     error: function (xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");
                         alert(" املئ الفورم بالانكليزيه ولاتترك فراغ");
-                        // window.location.reload(true);
+                        window.location.reload(true);
                     }
 
 
@@ -229,11 +232,11 @@
 
                 success:function( ) {
                     alert( 'تم الاضافة بنجاح');
-                    // window.location.reload(true);
+                    window.location.reload(true);
                 },
                 error: function(xhr,err){
                     alert("تحذير "+xhr.responseText);
-                    // window.location.reload(true);
+                    window.location.reload(true);
                 }
 
 

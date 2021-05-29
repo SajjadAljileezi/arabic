@@ -17,6 +17,8 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->string('size');
             $table->string('userid');
+            $table->string('tracking')->nullable();
+            $table->string('company')->nullable();
             $table->integer('weight');
             $table->integer('height');
             $table->integer('length');

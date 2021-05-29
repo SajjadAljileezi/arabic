@@ -218,7 +218,7 @@ class ItemController extends Controller
     {
 
         $id= Auth::user()->id;
-        $getItems = Item::where('userid',$id)->get();
+        $getItems = Item::where('userid',$id)->where('arrived',1)->get();
         $items= Measure::where('userid', '=', $id)->selectRaw('size as size ,SUM(weight) as weight,SUM(height) as height,SUM(length) as length,SUM(width) as width', )
         ->groupBy('size')->get();
          return view('readytoship',compact('items','getItems' ));
