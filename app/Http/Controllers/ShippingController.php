@@ -119,13 +119,15 @@ class ShippingController extends Controller
             $width  = $addToCart->width;
             $sizes  = $addToCart->size;
             $userid  = $addToCart->userid;
+            $tracking  = $addToCart->tracking;
+            $company  = $addToCart->company;
 
             $addAll = array('userid' => $userid,'size' => $sizes,'weight' => $weight,'height' => $height
-            ,'width' => $width,'length' => $length);
+            ,'width' => $width,'length' => $length,'company' => $company,'tracking' => $tracking);
 
         Cart::create($addAll);
         }
-//       $delete=  Measure::where('size', $size)->firstorfail()->delete();
+        $delete=  Measure::where('size', $size)->where('userid', $id)->delete();
 
         $response = array(
 
@@ -161,7 +163,7 @@ class ShippingController extends Controller
         $itemCard['length'] = $length;
         $itemCard['width'] = $width;
         $itemCard['company'] = $company;
-        $itemCard['size'] = $tracking;
+        $itemCard['tracking'] = $tracking;
         $itemCard['userid'] = $id;
 
         Cart::create($itemCard);
@@ -199,9 +201,10 @@ class ShippingController extends Controller
      * @param  \App\Models\Shipping  $shipping
      * @return \Illuminate\Http\Response
      */
-    public function show(Shipping $shipping)
+    public function deletecart(Request $request)
     {
-        //
+       $size= $request->size;
+       dd($size);
     }
 
     /**

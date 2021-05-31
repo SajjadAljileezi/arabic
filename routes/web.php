@@ -38,4 +38,5 @@ Route::get('/readytoships', [App\Http\Controllers\ItemController::class, 'calcul
 Route::post('/cart', [App\Http\Controllers\ShippingController::class, 'addToCart']);
 Route::post('/itemcart', [App\Http\Controllers\ShippingController::class, 'itemtocart']);
 Route::get('/carts', [App\Http\Controllers\CartdController::class, 'index'])->name('cart');
+Route::post('/deletecart', [App\Http\Controllers\ShippingController::class, 'deletecart']);
 

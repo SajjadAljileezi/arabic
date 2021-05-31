@@ -38,6 +38,9 @@
                     </form>
                 </div>
                 <hr class="m-5">
+                @if(   $getItems->count() < 1)
+                    <h4>لايوجد شحنات واصله للمخزن </h4>
+                @else
                 <h3 class="mb-5">الشحنات الموجودة (داخل امريكا) </h3>
 
                 <table class="table table-hover">
@@ -163,6 +166,7 @@
 
     </div>
         @endforeach
+        @endif
     <script type="text/javascript">
         $(".fa-sign-in-alt").click(function(){
             $('.dashboard').fadeToggle();

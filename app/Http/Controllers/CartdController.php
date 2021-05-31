@@ -18,9 +18,11 @@ class CartdController extends Controller
     {
         $id= Auth::user()->id;
 
-        $carts= Cart::where('userid', '=', $id)->selectRaw('size as size ,SUM(weight) as weight,SUM(height) as height,SUM(length) as length,SUM(width) as width', )
-            ->groupBy('size')->get();
-        return view('cart',compact('carts',  ));
+        $carts= Cart::where('userid', '=', $id)->whereNotNull('size')->selectRaw('size as size    ,SUM(weight) as weight,SUM(height) as height,SUM(length) as length,SUM(width) as width', )
+            ->groupBy('size' )->get();
+        $items= Cart::where('userid', '=', $id)->where('size', '=', null)->get();
+
+        return view('cart',compact('carts','items'  ));
     }
 
     /**
