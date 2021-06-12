@@ -10,4 +10,6 @@ class Boxes extends Model
     protected $fillable = [
            'weight','height','length','width','size'
     ];
+
+
 }

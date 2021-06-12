@@ -38,5 +38,10 @@ Route::get('/readytoships', [App\Http\Controllers\ItemController::class, 'calcul
 Route::post('/cart', [App\Http\Controllers\ShippingController::class, 'addToCart']);
 Route::post('/itemcart', [App\Http\Controllers\ShippingController::class, 'itemtocart']);
 Route::get('/carts', [App\Http\Controllers\CartdController::class, 'index'])->name('cart');
-Route::post('/deletecart', [App\Http\Controllers\ShippingController::class, 'deletecart']);
+Route::post('/deletecart', [App\Http\Controllers\CartdController::class, 'deletecart']);
+Route::post('/deleteitemcart', [App\Http\Controllers\CartdController::class, 'deleteItemCart']);
+Route::post('/doshipping', [App\Http\Controllers\CartdController::class, 'doShipping']);
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::post('/profileedit', [App\Http\Controllers\HomeController::class, 'profileedit']);
+
 

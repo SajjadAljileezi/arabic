@@ -201,11 +201,7 @@ class ShippingController extends Controller
      * @param  \App\Models\Shipping  $shipping
      * @return \Illuminate\Http\Response
      */
-    public function deletecart(Request $request)
-    {
-       $size= $request->size;
-       dd($size);
-    }
+
 
     /**
      * Show the form for editing the specified resource.
