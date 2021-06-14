@@ -171,8 +171,30 @@
             <button id="submitShipping" type="button" class="btn btn-success   ">احسب   </button>
         </div>
     @endif
-</div>
+    <div class="col-lg-6" id="project">
+        <div class="loadingio-spinner-spinner-1xm4wm9id87 displaySpiner"><div class="ldio-rs1matucqzk">
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+            </div></div>
 
+
+    </div>
+<table id="project" class="table table-hover mt-5 displaySpiner">
+    <thead>
+    <tr>
+
+        <th scope="col">الشركة</th>
+        <th scope="col">السعر</th>
+        <th scope="col">الايام</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="flash">
+
+
+</tr>
+    </tbody>
+</table>
+</div>
 <script type="text/javascript">
     $(".deleteItemsFromCart").click('change',function (e) {
         var currentRow = $(this).closest("tr");
@@ -224,6 +246,7 @@
     });
     $("#submitShipping").click(function(e){
         e.preventDefault();
+        $('.displaySpiner').removeClass('displaySpiner');
         var name = $("input[name=name]").val();
         var email = $("input[name=email]").val();
         var phone = $("input[name=phone]").val();
@@ -239,9 +262,29 @@
             data:{ name:name, email:email,phone:phone, address:address, city:city,country:country, "_token": "{{
             csrf_token() }}",},
 
-            success: function(){
+            success: function(shipment){
+                console.log(shipment)
+
+                $.each( shipment['rates'], function( key, value ) {
+                         var amount=  value['amount'];
+                         var estimated_days =value['estimated_days'];
+                         var provider  =value['provider'];
+
+
+
+                    //We add vPool HTML content to #myDIV
+                    $('#flash').html( `<td>${provider}</td>` );
+                    $('#flash').html( `<td>${estimated_days}</td>` );
+                    $('#flash').html( `<td>${amount}</td>` );
+                    // $("#days").html(estimated_days)
+                    // $("#price").html(amount)
+                    $('#project').addClass('displaySpiner');
+                    console.log(amount,estimated_days,provider)
+                });
                 // window.location.reload(true);
+
             },
+
 
             error: function(xhr,err){
                 console.log("تحذير "+xhr.responseText);

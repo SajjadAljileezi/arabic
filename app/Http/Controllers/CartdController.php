@@ -121,7 +121,7 @@ class CartdController extends Controller
         }
 
 
-        Shippo::setApiKey("shippo_test_9028af1821772fb07abb5d3957e29411c5ae0021");
+        Shippo::setApiKey("shippo_live_6b99157b14c1d754acde698663d67c746ab797ab");
 
         $fromAddress = array(
             'name' => 'Shawn Ippotle',
@@ -199,9 +199,9 @@ class CartdController extends Controller
                     "async" => false
                 )
             );
-            $rates = $shipment;
-            echo $rates;
 
+
+      echo $shipment;
 
           }
 
