@@ -15,6 +15,10 @@ class CreateCartdsTable extends Migration
     {
         Schema::create('cartds', function (Blueprint $table) {
             $table->id();
+            $table->integer('amount') ;
+            $table->string('userid');
+            $table->string('days') ;
+            $table->string('company') ;
             $table->timestamps();
         });
     }

@@ -171,9 +171,8 @@ class CartdController extends Controller
            $originalBoxSizeFrom = preg_replace("/[^a-zA-Z]/", '', $boxSize );
 
 
-            $getBoxOriginalsizes = Boxes::whereIn('size',  $originalBoxSizeFrom)->get();
-
-
+            $getBoxOriginalsizes = Boxes::whereIn('size',   $originalBoxSizeFrom )->get();
+                dd(count($getBoxOriginalsizes));
        $box=array();
         foreach($getBoxOriginalsizes as $k=> $boxy) {
 
@@ -186,7 +185,7 @@ class CartdController extends Controller
             $box[$k]['mass_unit']= 'lb';
 
         }
-
+dd($box);
 
         $result = array_merge($box, $itemIn);
 
@@ -205,6 +204,10 @@ class CartdController extends Controller
 
           }
 
+
+
+
+
     /**
      * Store a newly created resource in storage.
      *
@@ -222,10 +225,42 @@ class CartdController extends Controller
      * @param  \App\Models\Cartd  $cartd
      * @return \Illuminate\Http\Response
      */
-    public function show(Cartd $cartd)
+    public function checkout(Request $request)
     {
-        //
-    }
+
+
+            // Enter Your Stripe Secret
+            \Stripe\Stripe::setApiKey('sk_test_rcfuqteZTJmU3bTME2BLsoqX00H1X85ME5');
+
+            $amount = 100;
+            $amount *= 100;
+            $amount = (int) $amount;
+
+            $payment_intent = \Stripe\PaymentIntent::create([
+                'description' => 'Stripe Test Payment',
+                'amount' => $amount,
+                'currency' => 'INR',
+                'description' => 'Payment From Codehunger',
+                'payment_method_types' => ['card'],
+            ]);
+            $intent = $payment_intent->client_secret;
+
+            return view('checkout ', compact('intent'));
+
+        }
+
+        public function cart(Request $request)
+        {
+
+
+        }
+
+        public function savesession()
+        {
+            echo 'Payment Has been Received';
+        }
+
+
 
     /**
      * Show the form for editing the specified resource.

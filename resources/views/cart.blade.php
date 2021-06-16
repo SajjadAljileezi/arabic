@@ -3,299 +3,331 @@
 
 
 @section('content')
-<div class="container">
-    <h4 class="m-4"> الصناديق الجاهزة للشحن الخارجي </h4>
+    <div class="container">
+        <h4 class="m-4"> الصناديق الجاهزة للشحن الخارجي </h4>
 
-    <table id="myTable" class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">حجم الصندوق او التعقب</th>
-            <th scope="col">الوزن</th>
-            <th scope="col">الطول</th>
-            <th scope="col">العرض</th>
-            <th scope="col">الارتفاع</th>
-        </tr>
-        </thead>
-        @foreach ($carts as $cart)
-        <tbody>
-        <tr>
-            <th class="sh-size">{{$cart->size   }}</th>
-            <th class="dt-weight">{{$cart->weight}}</th>
-            <th class="dt-height">{{$cart->height}}</th>
-            <th class="dt-width">{{$cart->width}}</th>
-            <th class="dt-length">{{$cart->length}}</th>
-            <td scope="row" class="showItem">
-                <button name="" id="" type="button" class="btn btn-danger deleteItemsFromCart  "> احذف من السلة
-                </button>
-            </td>
-        </tr>
-        </tbody>
-        @endforeach
-    </table>
-    <h4 class="m-4"> القطع الجاهزة للشحن الخارجي </h4>
+        <table id="myTable" class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">حجم الصندوق او التعقب</th>
+                <th scope="col">الوزن</th>
+                <th scope="col">الطول</th>
+                <th scope="col">العرض</th>
+                <th scope="col">الارتفاع</th>
+            </tr>
+            </thead>
+            @foreach ($carts as $cart)
+                <tbody>
+                <tr>
+                    <th class="sh-size">{{$cart->size   }}</th>
+                    <th class="dt-weight">{{$cart->weight}}</th>
+                    <th class="dt-height">{{$cart->height}}</th>
+                    <th class="dt-width">{{$cart->width}}</th>
+                    <th class="dt-length">{{$cart->length}}</th>
+                    <td scope="row" class="showItem">
+                        <button name="" id="" type="button" class="btn btn-danger deleteItemsFromCart  "> احذف من السلة
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            @endforeach
+        </table>
+        <h4 class="m-4"> القطع الجاهزة للشحن الخارجي </h4>
 
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">حجم الصندوق او التعقب</th>
-            <th scope="col">الوزن</th>
-            <th scope="col">الطول</th>
-            <th scope="col">العرض</th>
-            <th scope="col">الارتفاع</th>
-        </tr>
-        </thead>
-        @foreach ($items as $item)
-        <tbody>
-        <tr>
-            <th class="dt-tracking">{{ $item->tracking  }}</th>
-            <td>{{$item->weight}}</td>
-            <td>{{$item->length}}</td>
-            <td>{{$item->width}}</td>
-            <td>{{$item->height}}</td>
-            <th scope="row" class="showItem">
-                <button name="" id="" type="button" class="btn btn-danger deleteItemFromCart  "> احذف من السلة </button>
-            </th>
-        </tr>
-        </tbody>
-        @endforeach
-    </table>
-    <hr>
-    <h4 class="m-5"> العنوان  </h4>
-   @if(count($profiles) >0)
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">حجم الصندوق او التعقب</th>
+                <th scope="col">الوزن</th>
+                <th scope="col">الطول</th>
+                <th scope="col">العرض</th>
+                <th scope="col">الارتفاع</th>
+            </tr>
+            </thead>
+            @foreach ($items as $item)
+                <tbody>
+                <tr>
+                    <th class="dt-tracking">{{ $item->tracking  }}</th>
+                    <td>{{$item->weight}}</td>
+                    <td>{{$item->length}}</td>
+                    <td>{{$item->width}}</td>
+                    <td>{{$item->height}}</td>
+                    <th scope="row" class="showItem">
+                        <button name="" id="" type="button" class="btn btn-danger deleteItemFromCart  "> احذف من السلة </button>
+                    </th>
+                </tr>
+                </tbody>
+            @endforeach
+        </table>
+        <hr>
+        <h4 class="m-5"> العنوان  </h4>
+        @if(count($profiles) >0)
 
-@foreach($profiles as $profile)
+            @foreach($profiles as $profile)
 
-    <form >
-        <div class="form-row ">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4 ">الاسم او الشركة</label>
-                <input type="text" value="{{ old('name') ?? $profile->name ?? 'default' }}"
-                       placeholder="{{$profile->name}}" class="form-control" id="taskTitle"
-                       name="name" >
+                <form >
+                    <div class="form-row ">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4 ">الاسم او الشركة</label>
+                            <input type="text" value="{{ old('name') ?? $profile->name ?? 'default' }}"
+                                   placeholder="{{$profile->name}}" class="form-control" id="taskTitle"
+                                   name="name" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4 float-right">الايميل</label>
+                            <input type="text" value="{{ old('email') ?? $profile->email ?? 'default' }}"
+                                   placeholder="{{$profile->email}}" class="form-control" id="taskTitle"
+                                   name="email" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddress">رقم التلفون </label>
+                        <input type="text" value="{{ old('phone') ?? $profile->phone ?? 'default' }}"
+                               placeholder="{{$profile->phone}}" class="form-control" id="taskTitle"
+                               name="phone" >
+                    </div>
+                    <div class="form-group">
+                        <label for="inputAddress">العنوان</label>
+                        <input type="text" value="{{ old('address') ?? $profile->address ?? 'default' }}"
+                               placeholder="{{$profile->address}}" class="form-control" id="taskTitle"
+                               name="address" >
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">الدولة</label>
+                            <input type="text" value="{{ old('country') ?? $profile->country ?? 'default' }}"
+                                   placeholder="{{$profile->country}}" class="form-control" id="taskTitle"
+                                   name="country" >
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="inputCity">المدينة</label>
+                                <input type="text" value="{{ old('city') ?? $profile->city ?? 'default' }}"
+                                       placeholder="{{$profile->city}}" class="form-control" id="taskTitle"
+                                       name="city" >
+                            </div> </div></div>
+
+
+
+
+                </form>
+            @endforeach
+
+
+
+            <div class="col-1">
+                <button id="submitShipping" type="button" class="btn btn-success   ">احسب   </button>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4 float-right">الايميل</label>
-                <input type="text" value="{{ old('email') ?? $profile->email ?? 'default' }}"
-                       placeholder="{{$profile->email}}" class="form-control" id="taskTitle"
-                       name="email" >
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="inputAddress">رقم التلفون </label>
-            <input type="text" value="{{ old('phone') ?? $profile->phone ?? 'default' }}"
-                   placeholder="{{$profile->phone}}" class="form-control" id="taskTitle"
-                   name="phone" >
-        </div>
-        <div class="form-group">
-            <label for="inputAddress">العنوان</label>
-            <input type="text" value="{{ old('address') ?? $profile->address ?? 'default' }}"
-                   placeholder="{{$profile->address}}" class="form-control" id="taskTitle"
-                   name="address" >
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCity">الدولة</label>
-                <input type="text" value="{{ old('country') ?? $profile->country ?? 'default' }}"
-                       placeholder="{{$profile->country}}" class="form-control" id="taskTitle"
-                       name="country" >
-            </div>
-            <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputCity">المدينة</label>
-                <input type="text" value="{{ old('city') ?? $profile->city ?? 'default' }}"
-                       placeholder="{{$profile->city}}" class="form-control" id="taskTitle"
-                       name="city" >
-            </div> </div></div>
-
-
-
-
-    </form>
-        @endforeach
-
-
-
-    <div class="col-1">
-        <button id="submitShipping" type="button" class="btn btn-success   ">احسب   </button>
-    </div>
-    @else
-        <form >
-            <div class="form-row ">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4 ">الاسم او الشركة</label>
-                    <input type="text" value=" "
-                           placeholder="الاسم" class="form-control" id="taskTitle"
-                           name="name" >
+        @else
+            <form >
+                <div class="form-row ">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4 ">الاسم او الشركة</label>
+                        <input type="text" value=" "
+                               placeholder="الاسم" class="form-control" id="taskTitle"
+                               name="name" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4 float-right">الايميل</label>
+                        <input type="text" value=" "
+                               placeholder="الايميل" class="form-control" id="taskTitle"
+                               name="email" >
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4 float-right">الايميل</label>
-                    <input type="text" value=" "
-                           placeholder="الايميل" class="form-control" id="taskTitle"
-                           name="email" >
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label for="inputAddress">رقم التلفون </label>
-                <input type="text" value=" "
-                       placeholder="رقم التلفون" class="form-control" id="taskTitle"
-                       name="phone" >
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">العنوان</label>
-                <input type="text" value=" "
-                       placeholder="العنوان" class="form-control" id="taskTitle"
-                       name="address" >
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">الدولة</label>
+                <div class="form-group">
+                    <label for="inputAddress">رقم التلفون </label>
                     <input type="text" value=" "
-                           placeholder="الدولة" class="form-control" id="taskTitle"
-                           name="country" >
+                           placeholder="رقم التلفون" class="form-control" id="taskTitle"
+                           name="phone" >
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">العنوان</label>
+                    <input type="text" value=" "
+                           placeholder="العنوان" class="form-control" id="taskTitle"
+                           name="address" >
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputCity">المدينة</label>
+                        <label for="inputCity">الدولة</label>
                         <input type="text" value=" "
-                               placeholder="المدينة" class="form-control" id="taskTitle"
-                               name="city" >
-                    </div> </div></div>
+                               placeholder="الدولة" class="form-control" id="taskTitle"
+                               name="country" >
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">المدينة</label>
+                            <input type="text" value=" "
+                                   placeholder="المدينة" class="form-control" id="taskTitle"
+                                   name="city" >
+                        </div> </div></div>
 
 
 
 
-        </form>
-        <div class="col-1">
-            <button id="submitShipping" type="button" class="btn btn-success   ">احسب   </button>
+            </form>
+            <div class="col-1">
+                <button id="submitShipping" type="button" class="btn btn-success   ">احسب   </button>
+            </div>
+        @endif
+        <div class="col-lg-6" id="project">
+            <div class="loadingio-spinner-spinner-1xm4wm9id87 displaySpiner"><div class="ldio-rs1matucqzk">
+                    <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                </div></div>
+
+
         </div>
-    @endif
-    <div class="col-lg-6" id="project">
-        <div class="loadingio-spinner-spinner-1xm4wm9id87 displaySpiner"><div class="ldio-rs1matucqzk">
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-            </div></div>
+        <table id="project" class="table table-hover mt-5 displaySpiner">
+            <thead>
+            <tr>
 
-
+                <th scope="col">الشركة</th>
+                <th scope="col">السعر</th>
+                <th scope="col">الايام</th>
+            </tr>
+            </thead>
+            <tbody id="flash">
+            {{--<tr>--}}
+            {{--    <td id="company"></td>--}}
+            {{--    <td></td>--}}
+            {{--    <td></td>--}}
+            {{--</tr>--}}
+            </tbody>
+        </table>
     </div>
-<table id="project" class="table table-hover mt-5 displaySpiner">
-    <thead>
-    <tr>
+    <script type="text/javascript">
+        $(".deleteItemsFromCart").click('change',function (e) {
+            var currentRow = $(this).closest("tr");
+            var size = currentRow.find(".sh-size").html();
 
-        <th scope="col">الشركة</th>
-        <th scope="col">السعر</th>
-        <th scope="col">الايام</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr id="flash">
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                url: '/deletecart',
 
+                data:{ size:size, "_token": "{{ csrf_token() }}",},
 
-</tr>
-    </tbody>
-</table>
-</div>
-<script type="text/javascript">
-    $(".deleteItemsFromCart").click('change',function (e) {
-        var currentRow = $(this).closest("tr");
-        var size = currentRow.find(".sh-size").html();
-
-        $.ajax({
-            type: 'POST',
-            dataType: "json",
-            url: '/deletecart',
-
-            data:{ size:size, "_token": "{{ csrf_token() }}",},
-
-            success:function( ) {
-                alert( 'تم الاضافةالى السلة بنجاح');
-                // window.location.reload(true);
-            },
-            error: function(xhr,err){
-                alert("تحذير "+xhr.responseText);
-                // window.location.reload(true);
-            }
+                success:function( ) {
+                    alert( 'تم الاضافةالى السلة بنجاح');
+                    // window.location.reload(true);
+                },
+                error: function(xhr,err){
+                    alert("تحذير "+xhr.responseText);
+                    // window.location.reload(true);
+                }
 
 
 
+            });
         });
-    });
-    $(".deleteItemFromCart").click('change',function (e) {
-        var currentRow = $(this).closest("tr");
-        var tracking = currentRow.find(".dt-tracking").html();
+        $(".deleteItemFromCart").click('change',function (e) {
+            var currentRow = $(this).closest("tr");
+            var tracking = currentRow.find(".dt-tracking").html();
 
-        $.ajax({
-            type: 'POST',
-            dataType: "json",
-            url: '/deleteitemcart',
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                url: '/deleteitemcart',
 
-            data:{ tracking:tracking, "_token": "{{ csrf_token() }}",},
+                data:{ tracking:tracking, "_token": "{{ csrf_token() }}",},
 
-            success:function( ) {
-                alert( 'تم الاضافةالى السلة بنجاح');
-                // window.location.reload(true);
-            },
-            error: function(xhr,err){
-                alert("تحذير "+xhr.responseText);
-                // window.location.reload(true);
-            }
-
+                success:function( ) {
+                    alert( 'تم الاضافةالى السلة بنجاح');
+                    // window.location.reload(true);
+                },
+                error: function(xhr,err){
+                    alert("تحذير "+xhr.responseText);
+                    // window.location.reload(true);
+                }
 
 
+
+            });
         });
-    });
-    $("#submitShipping").click(function(e){
-        e.preventDefault();
-        $('.displaySpiner').removeClass('displaySpiner');
-        var name = $("input[name=name]").val();
-        var email = $("input[name=email]").val();
-        var phone = $("input[name=phone]").val();
-        var address = $("input[name=address]").val();
-        var city = $("input[name=city]").val();
-        var country = $("input[name=country]").val();
+        $("#submitShipping").click(function(e){
+            e.preventDefault();
+            $('.displaySpiner').removeClass('displaySpiner');
+            var name = $("input[name=name]").val();
+            var email = $("input[name=email]").val();
+            var phone = $("input[name=phone]").val();
+            var address = $("input[name=address]").val();
+            var city = $("input[name=city]").val();
+            var country = $("input[name=country]").val();
 
-        $.ajax({
-            type:'POST',
-            dataType: "json",
-            url:'/doshipping',
+            $.ajax({
+                type:'POST',
+                dataType: "json",
+                url:'/doshipping',
 
-            data:{ name:name, email:email,phone:phone, address:address, city:city,country:country, "_token": "{{
+                data:{ name:name, email:email,phone:phone, address:address, city:city,country:country, "_token": "{{
             csrf_token() }}",},
 
-            success: function(shipment){
-                console.log(shipment)
-
-                $.each( shipment['rates'], function( key, value ) {
-                         var amount=  value['amount'];
-                         var estimated_days =value['estimated_days'];
-                         var provider  =value['provider'];
+                success: function(shipment){
 
 
 
-                    //We add vPool HTML content to #myDIV
-                    $('#flash').html( `<td>${provider}</td>` );
-                    $('#flash').html( `<td>${estimated_days}</td>` );
-                    $('#flash').html( `<td>${amount}</td>` );
-                    // $("#days").html(estimated_days)
-                    // $("#price").html(amount)
-                    $('#project').addClass('displaySpiner');
-                    console.log(amount,estimated_days,provider)
+                    $.each( shipment['rates'], function( key, value ) {
+
+                        var amount =  value['amount'];
+                        var estimated_days =value['estimated_days'];
+                        var provider  = value['provider'];
+
+
+
+
+                        $("#flash").append(`<tr><td class="company">${provider} </td> <td class="amount">${amount}
+                    </td><td class="days">${estimated_days} </td>
+                   <td> <button id="submitprice" type="button" class="btn btn-success   ">اختر   </button></td></tr>`)
+                        // $("#days").html(estimated_days)
+                        // $("#price").html(amount)
+                        $('#project').addClass('displaySpiner');
+
+                    });
+
+                    // window.location.reload(true);
+
+                },
+
+
+                error: function(xhr,err){
+                    console.log("تحذير "+xhr.responseText);
+                    // window.location.reload(true);
+                }
+
+
+            });
+
+
+
+        })
+        $( document ).ready(function() {
+            $(document).on('click','#submitprice', function() {
+                var currentRow = $(this).closest("tr");
+                var amount = currentRow.find(".amount").html();
+                var provider = currentRow.find(".company").html();
+                var days = currentRow.find(".days").html();
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: '/addtocart',
+
+                    data:{ amount:amount,provider:provider,days:days, "_token": "{{ csrf_token() }}",},
+
+                    success:function( ) {
+                        alert( 'تم الاضافةالى السلة بنجاح');
+                        // window.location.reload(true);
+                    },
+                    error: function(xhr,err){
+                        alert("تحذير "+xhr.responseText);
+                        // window.location.reload(true);
+                    }
+
+
+
                 });
-                // window.location.reload(true);
-
-            },
-
-
-            error: function(xhr,err){
-                console.log("تحذير "+xhr.responseText);
-                // window.location.reload(true);
-            }
-
+            });
 
         });
-
-
-
-    })
-     </script>
+    </script>
 @endsection
