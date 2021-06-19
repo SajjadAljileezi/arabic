@@ -15,6 +15,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "paypal/paypal-checkout-sdk": "1.0.1",
         "shippo/shippo-php": "^1.4",
         "stripe/stripe-php": "^7.83"
     },

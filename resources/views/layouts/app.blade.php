@@ -61,6 +61,12 @@
                         fa-cart-plus"></i> </h4></a>
                             </li>
                             @endif
+                                @if (count(\App\Models\Cartd::where('userid',Auth::user()->id)->get()) > 0)
+                            <li class="nav-item">
+                                <a href="{{ route('checkout') }}"> <h4   class=" m-2">  <i class="fas
+                        fa-cash-register"></i> </h4></a>
+                            </li>
+                            @endif
                             <li class="nav-item">
                                 <a href="{{ route('ready') }}"> <h4   class=" m-2">  اشحن </h4></a>
                             </li>

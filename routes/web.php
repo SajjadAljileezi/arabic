@@ -44,7 +44,7 @@ Route::post('/doshipping', [App\Http\Controllers\CartdController::class, 'doShip
 Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
 Route::post('/profileedit', [App\Http\Controllers\HomeController::class, 'profileedit']);
 Route::post('/addtocart', [App\Http\Controllers\CartdController::class, 'cart']);
-
 Route::post('/checkouts', [App\Http\Controllers\CartdController::class, 'afterPayment'])->name('checkout.credit-card');
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'checkOut'])->name('checkout');
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Archief;
 use App\Models\Boxes;
 use App\Models\Profile;
 use Shippo;
@@ -165,29 +166,36 @@ class CartdController extends Controller
         $boxSize =array();
         foreach($carts as $k=> $cart) {
 
-            $boxSize[$k]= $cart->size ;
+            $boxSize[$k]['size']= $cart->size ;
+            $boxSize[$k]['weight']= $cart->weight ;
+            $boxSize[$k]['height']= 16 ;
+            $boxSize[$k]['length']= 15 ;
+            $boxSize[$k]['width']= 27 ;
+            $boxSize[$k]['distance_unit']= 'in';
+            $boxSize[$k]['mass_unit']= 'lb';
         }
 
-           $originalBoxSizeFrom = preg_replace("/[^a-zA-Z]/", '', $boxSize );
+
+//           $originalBoxSizeFrom = preg_replace("/[^a-zA-Z]/", '', $boxSize );
 
 
-            $getBoxOriginalsizes = Boxes::whereIn('size',   $originalBoxSizeFrom )->get();
-                dd(count($getBoxOriginalsizes));
-       $box=array();
-        foreach($getBoxOriginalsizes as $k=> $boxy) {
+//            $getBoxOriginalsizes = Boxes::where('size',   $originalBoxSizeFrom )->get();
 
-            $box[$k]['weight']= $boxy->weight;
-            $box[$k]['height']= $boxy->height;
-            $box[$k]['length']= $boxy->length;
-            $box[$k]['width']= $boxy->width;
-            $box[$k]['size']= $boxy->size;
-            $box[$k]['distance_unit']= 'in';
-            $box[$k]['mass_unit']= 'lb';
+//       $box=array();
+//        foreach($getBoxOriginalsizes as $k=> $boxy) {
+//
+//            $box[$k]['weight']= $boxy->weight;
+//            $box[$k]['height']= $boxy->height;
+//            $box[$k]['length']= $boxy->length;
+//            $box[$k]['width']= $boxy->width;
+//            $box[$k]['size']= $boxy->size;
+//            $box[$k]['distance_unit']= 'in';
+//            $box[$k]['mass_unit']= 'lb';
+//
+//        }
+//dd($box);
 
-        }
-dd($box);
-
-        $result = array_merge($box, $itemIn);
+        $result = array_merge($boxSize, $itemIn);
 
 
             $shipment = \Shippo_Shipment::create(
@@ -239,7 +247,7 @@ dd($box);
             $payment_intent = \Stripe\PaymentIntent::create([
                 'description' => 'Stripe Test Payment',
                 'amount' => $amount,
-                'currency' => 'INR',
+                'currency' => 'USD',
                 'description' => 'Payment From Codehunger',
                 'payment_method_types' => ['card'],
             ]);
@@ -251,6 +259,41 @@ dd($box);
 
         public function cart(Request $request)
         {
+            $id= Auth::user()->id;
+
+            $cartUser['amount']=$request->amount;
+            $cartUser['days']=$request->days;
+            $cartUser['company']=$request->provider;
+            $cartUser['userid']=$id;
+            Cartd::create($cartUser);
+
+            $cartItems= Cart::where('userid', '=', $id)->get();
+            foreach($cartItems as $cartItem) {
+                $weight  = $cartItem->weight;
+                $size  = $cartItem->size;
+                $height  = $cartItem->height;
+                $length  = $cartItem->length;
+                $width  = $cartItem->width;
+                $arrived  = 1;
+                $userid  = $cartItem->userid;
+                $trackings  = $cartItem->tracking;
+                $company  = $cartItem->company;
+
+                $addAll = array('userid' => $userid,'arrived' => $arrived,'weight' => $weight,'height' => $height
+                ,'width' => $width,'size' => $size,'length' => $length,'company' => $company,'tracking' => $trackings);
+
+                Archief::create($addAll);
+            }
+            $delete=  Cart::where('userid', $id)->delete();
+
+            $response = array(
+
+                'status' => 'success',
+                'msg' => 'added to cart successfully',
+            );
+
+            return json_encode($response);
+
 
 
         }
