@@ -10,4 +10,6 @@ class Cartd extends Model
     protected $fillable = [
         'amount' ,'company' , 'userid' , 'days' ,
     ];
+
+
 }
